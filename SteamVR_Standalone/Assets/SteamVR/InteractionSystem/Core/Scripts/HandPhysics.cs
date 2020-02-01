@@ -115,7 +115,7 @@ namespace Valve.VR.InteractionSystem
             if (hand.skeleton == null) return;
             initialized = true;
 
-            // get the desired pose of the wrist in world space. Can't get the wrist bone transform, as this is affected by the resulting physics.
+
 
             wristToRoot = Matrix4x4.TRS(ProcessPos(wristBone, hand.skeleton.GetBone(wristBone).localPosition),
                 ProcessRot(wristBone, hand.skeleton.GetBone(wristBone).localRotation),
@@ -152,7 +152,7 @@ namespace Valve.VR.InteractionSystem
         {
             wrist = hand.skeleton.GetBone(SteamVR_Skeleton_JointIndexes.wrist);
 
-            // set finger tip positions in wrist space
+
 
             for (int finger = 0; finger < 5; finger++)
             {

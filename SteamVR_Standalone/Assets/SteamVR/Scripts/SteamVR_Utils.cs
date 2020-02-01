@@ -8,22 +8,22 @@ using System.Text;
 using UnityEngine;
 using Valve.VR;
 
-// Token: 0x02000002 RID: 2
+
 public static class SteamVR_Utils
 {
-    // Token: 0x06000001 RID: 1 RVA: 0x00002170 File Offset: 0x00000370
+
     public static bool IsValid(Vector3 vector)
     {
         return !float.IsNaN(vector.x) && !float.IsNaN(vector.y) && !float.IsNaN(vector.z);
     }
 
-    // Token: 0x06000002 RID: 2 RVA: 0x0000C600 File Offset: 0x0000A800
+
     public static bool IsValid(Quaternion rotation)
     {
         return !float.IsNaN(rotation.x) && !float.IsNaN(rotation.y) && !float.IsNaN(rotation.z) && !float.IsNaN(rotation.w) && (rotation.x != 0f || rotation.y != 0f || rotation.z != 0f || rotation.w != 0f);
     }
 
-    // Token: 0x06000003 RID: 3 RVA: 0x0000C67C File Offset: 0x0000A87C
+
     public static Quaternion Slerp(Quaternion A, Quaternion B, float t)
     {
         float num = Mathf.Clamp(A.x * B.x + A.y * B.y + A.z * B.z + A.w * B.w, -1f, 1f);
@@ -49,43 +49,43 @@ public static class SteamVR_Utils
         return new Quaternion(num4 * A.x + num5 * B.x, num4 * A.y + num5 * B.y, num4 * A.z + num5 * B.z, num4 * A.w + num5 * B.w);
     }
 
-    // Token: 0x06000004 RID: 4 RVA: 0x0000219C File Offset: 0x0000039C
+
     public static Vector3 Lerp(Vector3 A, Vector3 B, float t)
     {
         return new Vector3(SteamVR_Utils.Lerp(A.x, B.x, t), SteamVR_Utils.Lerp(A.y, B.y, t), SteamVR_Utils.Lerp(A.z, B.z, t));
     }
 
-    // Token: 0x06000005 RID: 5 RVA: 0x000021D9 File Offset: 0x000003D9
+
     public static float Lerp(float A, float B, float t)
     {
         return A + (B - A) * t;
     }
 
-    // Token: 0x06000006 RID: 6 RVA: 0x000021D9 File Offset: 0x000003D9
+
     public static double Lerp(double A, double B, double t)
     {
         return A + (B - A) * t;
     }
 
-    // Token: 0x06000007 RID: 7 RVA: 0x000021E2 File Offset: 0x000003E2
+
     public static float InverseLerp(Vector3 A, Vector3 B, Vector3 result)
     {
         return Vector3.Dot(result - A, B - A);
     }
 
-    // Token: 0x06000008 RID: 8 RVA: 0x000021F7 File Offset: 0x000003F7
+
     public static float InverseLerp(float A, float B, float result)
     {
         return (result - A) / (B - A);
     }
 
-    // Token: 0x06000009 RID: 9 RVA: 0x000021F7 File Offset: 0x000003F7
+
     public static double InverseLerp(double A, double B, double result)
     {
         return (result - A) / (B - A);
     }
 
-    // Token: 0x0600000A RID: 10 RVA: 0x00002200 File Offset: 0x00000400
+
     public static float Saturate(float A)
     {
         if (A < 0f)
@@ -99,13 +99,13 @@ public static class SteamVR_Utils
         return 1f;
     }
 
-    // Token: 0x0600000B RID: 11 RVA: 0x0000221F File Offset: 0x0000041F
+
     public static Vector2 Saturate(Vector2 A)
     {
         return new Vector2(SteamVR_Utils.Saturate(A.x), SteamVR_Utils.Saturate(A.y));
     }
 
-    // Token: 0x0600000C RID: 12 RVA: 0x0000223C File Offset: 0x0000043C
+
     public static float Abs(float A)
     {
         if (A >= 0f)
@@ -115,13 +115,13 @@ public static class SteamVR_Utils
         return -A;
     }
 
-    // Token: 0x0600000D RID: 13 RVA: 0x0000224A File Offset: 0x0000044A
+
     public static Vector2 Abs(Vector2 A)
     {
         return new Vector2(SteamVR_Utils.Abs(A.x), SteamVR_Utils.Abs(A.y));
     }
 
-    // Token: 0x0600000E RID: 14 RVA: 0x00002267 File Offset: 0x00000467
+
     private static float _copysign(float sizeval, float signval)
     {
         if (Mathf.Sign(signval) != 1f)
@@ -131,7 +131,7 @@ public static class SteamVR_Utils
         return Mathf.Abs(sizeval);
     }
 
-    // Token: 0x0600000F RID: 15 RVA: 0x0000C790 File Offset: 0x0000A990
+
     public static Quaternion GetRotation(this Matrix4x4 matrix)
     {
         Quaternion quaternion = default(Quaternion);
@@ -145,7 +145,7 @@ public static class SteamVR_Utils
         return quaternion;
     }
 
-    // Token: 0x06000010 RID: 16 RVA: 0x0000C8DC File Offset: 0x0000AADC
+
     public static Vector3 GetPosition(this Matrix4x4 matrix)
     {
         float m = matrix.m03;
@@ -154,7 +154,7 @@ public static class SteamVR_Utils
         return new Vector3(m, m2, m3);
     }
 
-    // Token: 0x06000011 RID: 17 RVA: 0x0000C904 File Offset: 0x0000AB04
+
     public static Vector3 GetScale(this Matrix4x4 m)
     {
         float x = Mathf.Sqrt(m.m00 * m.m00 + m.m01 * m.m01 + m.m02 * m.m02);
@@ -163,19 +163,19 @@ public static class SteamVR_Utils
         return new Vector3(x, y, z);
     }
 
-    // Token: 0x06000012 RID: 18 RVA: 0x00002284 File Offset: 0x00000484
+
     public static float GetLossyScale(Transform t)
     {
         return t.lossyScale.x;
     }
 
-    // Token: 0x06000013 RID: 19 RVA: 0x00002291 File Offset: 0x00000491
+
     public static string GetBadMD5Hash(string usedString)
     {
         return SteamVR_Utils.GetBadMD5Hash(Encoding.UTF8.GetBytes(usedString + "foobar"));
     }
 
-    // Token: 0x06000014 RID: 20 RVA: 0x0000C9A4 File Offset: 0x0000ABA4
+
     public static string GetBadMD5Hash(byte[] bytes)
     {
         byte[] array = new MD5CryptoServiceProvider().ComputeHash(bytes);
@@ -187,7 +187,7 @@ public static class SteamVR_Utils
         return stringBuilder.ToString();
     }
 
-    // Token: 0x06000015 RID: 21 RVA: 0x000022AD File Offset: 0x000004AD
+
     public static string GetBadMD5HashFromFile(string filePath)
     {
         if (!File.Exists(filePath))
@@ -197,7 +197,7 @@ public static class SteamVR_Utils
         return SteamVR_Utils.GetBadMD5Hash(File.ReadAllText(filePath) + "foobar");
     }
 
-    // Token: 0x06000016 RID: 22 RVA: 0x0000C9F0 File Offset: 0x0000ABF0
+
     public static string SanitizePath(string path, bool allowLeadingSlash = true)
     {
         if (path.Contains("\\\\"))
@@ -215,10 +215,10 @@ public static class SteamVR_Utils
         return path;
     }
 
-    // Token: 0x06000017 RID: 23 RVA: 0x0000CA60 File Offset: 0x0000AC60
+
     public static object CallSystemFn(SteamVR_Utils.SystemFn fn, params object[] args)
     {
-        bool flag = !SteamVR_Standalone.active;
+        bool flag = !SteamVR.active;
         if (flag)
         {
             EVRInitError evrinitError = EVRInitError.None;
@@ -233,7 +233,7 @@ public static class SteamVR_Utils
         return result;
     }
 
-    // Token: 0x06000018 RID: 24 RVA: 0x0000CAA8 File Offset: 0x0000ACA8
+
     public static void TakeStereoScreenshot(uint screenshotHandle, GameObject target, int cellSize, float ipd, ref string previewFilename, ref string VRFilename)
     {
         Texture2D texture2D = new Texture2D(4096, 4096, TextureFormat.ARGB32, false);
@@ -383,19 +383,19 @@ public static class SteamVR_Utils
         UnityEngine.Object.DestroyImmediate(texture2D);
     }
 
-    // Token: 0x06000019 RID: 25 RVA: 0x000022CE File Offset: 0x000004CE
+
     public static void QueueEventOnRenderThread(int eventID)
     {
-        GL.IssuePluginEvent(SteamVR_Standalone.Unity.GetRenderEventFunc(), eventID);
+        GL.IssuePluginEvent(SteamVR.Unity.GetRenderEventFunc(), eventID);
     }
 
-    // Token: 0x04000001 RID: 1
+
     private const string secretKey = "foobar";
 
-    // Token: 0x02000003 RID: 3
+
     public class Event
     {
-        // Token: 0x0600001A RID: 26 RVA: 0x0000D0CC File Offset: 0x0000B2CC
+
         public static void Listen(string message, SteamVR_Utils.Event.Handler action)
         {
             SteamVR_Utils.Event.Handler handler = SteamVR_Utils.Event.listeners[message] as SteamVR_Utils.Event.Handler;
@@ -407,7 +407,7 @@ public static class SteamVR_Utils
             SteamVR_Utils.Event.listeners[message] = action;
         }
 
-        // Token: 0x0600001B RID: 27 RVA: 0x0000D114 File Offset: 0x0000B314
+
         public static void Remove(string message, SteamVR_Utils.Event.Handler action)
         {
             SteamVR_Utils.Event.Handler handler = SteamVR_Utils.Event.listeners[message] as SteamVR_Utils.Event.Handler;
@@ -417,7 +417,7 @@ public static class SteamVR_Utils
             }
         }
 
-        // Token: 0x0600001C RID: 28 RVA: 0x0000D14C File Offset: 0x0000B34C
+
         public static void Send(string message, params object[] args)
         {
             SteamVR_Utils.Event.Handler handler = SteamVR_Utils.Event.listeners[message] as SteamVR_Utils.Event.Handler;
@@ -427,20 +427,20 @@ public static class SteamVR_Utils
             }
         }
 
-        // Token: 0x04000002 RID: 2
+
         private static Hashtable listeners = new Hashtable();
 
-        // Token: 0x02000004 RID: 4
-        // (Invoke) Token: 0x06000020 RID: 32
+
+
         public delegate void Handler(params object[] args);
     }
 
-    // Token: 0x02000005 RID: 5
+
     [Serializable]
     public struct RigidTransform
     {
-        // Token: 0x17000001 RID: 1
-        // (get) Token: 0x06000023 RID: 35 RVA: 0x000022EF File Offset: 0x000004EF
+
+
         public static SteamVR_Utils.RigidTransform identity
         {
             get
@@ -449,27 +449,27 @@ public static class SteamVR_Utils
             }
         }
 
-        // Token: 0x06000024 RID: 36 RVA: 0x00002300 File Offset: 0x00000500
+
         public static SteamVR_Utils.RigidTransform FromLocal(Transform t)
         {
             return new SteamVR_Utils.RigidTransform(t.localPosition, t.localRotation);
         }
 
-        // Token: 0x06000025 RID: 37 RVA: 0x00002313 File Offset: 0x00000513
+
         public RigidTransform(Vector3 pos, Quaternion rot)
         {
             this.pos = pos;
             this.rot = rot;
         }
 
-        // Token: 0x06000026 RID: 38 RVA: 0x00002323 File Offset: 0x00000523
+
         public RigidTransform(Transform t)
         {
             this.pos = t.position;
             this.rot = t.rotation;
         }
 
-        // Token: 0x06000027 RID: 39 RVA: 0x0000D174 File Offset: 0x0000B374
+
         public RigidTransform(Transform from, Transform to)
         {
             Quaternion quaternion = Quaternion.Inverse(from.rotation);
@@ -477,7 +477,7 @@ public static class SteamVR_Utils
             this.pos = quaternion * (to.position - from.position);
         }
 
-        // Token: 0x06000028 RID: 40 RVA: 0x0000D1BC File Offset: 0x0000B3BC
+
         public RigidTransform(HmdMatrix34_t pose)
         {
             Matrix4x4 identity = Matrix4x4.identity;
@@ -497,7 +497,7 @@ public static class SteamVR_Utils
             this.rot = identity.GetRotation();
         }
 
-        // Token: 0x06000029 RID: 41 RVA: 0x0000D2A0 File Offset: 0x0000B4A0
+
         public RigidTransform(HmdMatrix44_t pose)
         {
             Matrix4x4 identity = Matrix4x4.identity;
@@ -521,7 +521,7 @@ public static class SteamVR_Utils
             this.rot = identity.GetRotation();
         }
 
-        // Token: 0x0600002A RID: 42 RVA: 0x0000D3C4 File Offset: 0x0000B5C4
+
         public HmdMatrix44_t ToHmdMatrix44()
         {
             Matrix4x4 matrix4x = Matrix4x4.TRS(this.pos, this.rot, Vector3.one);
@@ -546,7 +546,7 @@ public static class SteamVR_Utils
             };
         }
 
-        // Token: 0x0600002B RID: 43 RVA: 0x0000D4F8 File Offset: 0x0000B6F8
+
         public HmdMatrix34_t ToHmdMatrix34()
         {
             Matrix4x4 matrix4x = Matrix4x4.TRS(this.pos, this.rot, Vector3.one);
@@ -567,7 +567,7 @@ public static class SteamVR_Utils
             };
         }
 
-        // Token: 0x0600002C RID: 44 RVA: 0x0000D5EC File Offset: 0x0000B7EC
+
         public override bool Equals(object o)
         {
             if (o is SteamVR_Utils.RigidTransform)
@@ -578,25 +578,25 @@ public static class SteamVR_Utils
             return false;
         }
 
-        // Token: 0x0600002D RID: 45 RVA: 0x0000233D File Offset: 0x0000053D
+
         public override int GetHashCode()
         {
             return this.pos.GetHashCode() ^ this.rot.GetHashCode();
         }
 
-        // Token: 0x0600002E RID: 46 RVA: 0x00002362 File Offset: 0x00000562
+
         public static bool operator ==(SteamVR_Utils.RigidTransform a, SteamVR_Utils.RigidTransform b)
         {
             return a.pos == b.pos && a.rot == b.rot;
         }
 
-        // Token: 0x0600002F RID: 47 RVA: 0x0000238A File Offset: 0x0000058A
+
         public static bool operator !=(SteamVR_Utils.RigidTransform a, SteamVR_Utils.RigidTransform b)
         {
             return a.pos != b.pos || a.rot != b.rot;
         }
 
-        // Token: 0x06000030 RID: 48 RVA: 0x0000D630 File Offset: 0x0000B830
+
         public static SteamVR_Utils.RigidTransform operator *(SteamVR_Utils.RigidTransform a, SteamVR_Utils.RigidTransform b)
         {
             return new SteamVR_Utils.RigidTransform
@@ -606,14 +606,14 @@ public static class SteamVR_Utils
             };
         }
 
-        // Token: 0x06000031 RID: 49 RVA: 0x000023B2 File Offset: 0x000005B2
+
         public void Inverse()
         {
             this.rot = Quaternion.Inverse(this.rot);
             this.pos = -(this.rot * this.pos);
         }
 
-        // Token: 0x06000032 RID: 50 RVA: 0x0000D684 File Offset: 0x0000B884
+
         public SteamVR_Utils.RigidTransform GetInverse()
         {
             SteamVR_Utils.RigidTransform result = new SteamVR_Utils.RigidTransform(this.pos, this.rot);
@@ -621,45 +621,45 @@ public static class SteamVR_Utils
             return result;
         }
 
-        // Token: 0x06000033 RID: 51 RVA: 0x000023E1 File Offset: 0x000005E1
+
         public void Multiply(SteamVR_Utils.RigidTransform a, SteamVR_Utils.RigidTransform b)
         {
             this.rot = a.rot * b.rot;
             this.pos = a.pos + a.rot * b.pos;
         }
 
-        // Token: 0x06000034 RID: 52 RVA: 0x0000241C File Offset: 0x0000061C
+
         public Vector3 InverseTransformPoint(Vector3 point)
         {
             return Quaternion.Inverse(this.rot) * (point - this.pos);
         }
 
-        // Token: 0x06000035 RID: 53 RVA: 0x0000243A File Offset: 0x0000063A
+
         public Vector3 TransformPoint(Vector3 point)
         {
             return this.pos + this.rot * point;
         }
 
-        // Token: 0x06000036 RID: 54 RVA: 0x00002453 File Offset: 0x00000653
+
         public static Vector3 operator *(SteamVR_Utils.RigidTransform t, Vector3 v)
         {
             return t.TransformPoint(v);
         }
 
-        // Token: 0x06000037 RID: 55 RVA: 0x0000245D File Offset: 0x0000065D
+
         public static SteamVR_Utils.RigidTransform Interpolate(SteamVR_Utils.RigidTransform a, SteamVR_Utils.RigidTransform b, float t)
         {
             return new SteamVR_Utils.RigidTransform(Vector3.Lerp(a.pos, b.pos, t), Quaternion.Slerp(a.rot, b.rot, t));
         }
 
-        // Token: 0x06000038 RID: 56 RVA: 0x00002488 File Offset: 0x00000688
+
         public void Interpolate(SteamVR_Utils.RigidTransform to, float t)
         {
             this.pos = SteamVR_Utils.Lerp(this.pos, to.pos, t);
             this.rot = SteamVR_Utils.Slerp(this.rot, to.rot, t);
         }
 
-        // Token: 0x06000039 RID: 57 RVA: 0x0000D6AC File Offset: 0x0000B8AC
+
         public static Mesh CreateHiddenAreaMesh(HiddenAreaMesh_t src, VRTextureBounds_t bounds)
         {
             if (src.unTriangleCount == 0u)
@@ -731,14 +731,14 @@ public static class SteamVR_Utils
             };
         }
 
-        // Token: 0x04000003 RID: 3
+
         public Vector3 pos;
 
-        // Token: 0x04000004 RID: 4
+
         public Quaternion rot;
     }
 
-    // Token: 0x02000006 RID: 6
-    // (Invoke) Token: 0x0600003B RID: 59
+
+
     public delegate object SystemFn(CVRSystem system, params object[] args);
 }

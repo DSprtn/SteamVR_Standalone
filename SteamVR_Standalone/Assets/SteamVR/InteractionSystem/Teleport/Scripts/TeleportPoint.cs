@@ -311,38 +311,4 @@ namespace Valve.VR.InteractionSystem
         }
     }
 
-
-#if UNITY_EDITOR
-	//-------------------------------------------------------------------------
-	[CustomEditor( typeof( TeleportPoint ) )]
-	public class TeleportPointEditor : Editor
-	{
-		//-------------------------------------------------
-		void OnEnable()
-		{
-			if ( Selection.activeTransform )
-			{
-				TeleportPoint teleportPoint = Selection.activeTransform.GetComponent<TeleportPoint>();
-                if (teleportPoint != null)
-				    teleportPoint.UpdateVisualsInEditor();
-			}
-		}
-
-
-		//-------------------------------------------------
-		public override void OnInspectorGUI()
-		{
-			DrawDefaultInspector();
-
-			if ( Selection.activeTransform )
-			{
-				TeleportPoint teleportPoint = Selection.activeTransform.GetComponent<TeleportPoint>();
-				if ( GUI.changed )
-				{
-					teleportPoint.UpdateVisualsInEditor();
-				}
-			}
-		}
-	}
-#endif
 }

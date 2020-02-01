@@ -121,40 +121,21 @@ namespace Valve.VR
 
         private static void FindPreinitializeMethod()
         {
-            Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
-            for (int assemblyIndex = 0; assemblyIndex < assemblies.Length; assemblyIndex++)
-            {
-                Assembly assembly = assemblies[assemblyIndex];
-                Type type = assembly.GetType(SteamVR_Input_Generator_Names.fullActionsClassName);
-                if (type != null)
-                {
-                    MethodInfo preinitMethodInfo = type.GetMethod(SteamVR_Input_Generator_Names.preinitializeMethodName);
-                    if (preinitMethodInfo != null)
-                    {
-                        preinitMethodInfo.Invoke(null, null);
-                        return;
-                    }
-                }
-            }
+            SteamVR_Actions.PreInitialize();
         }
 
         /// <summary>
-        /// Get all the handles for actions and action sets.
+
         /// Initialize our dictionaries of action / action set names.
-        /// Setup the tracking space universe origin
+
         /// </summary>
         public static void Initialize(bool force = false)
         {
             if (initialized == true && force == false)
                 return;
 
-#if UNITY_EDITOR
-            CheckSetup();
-            if (IsOpeningSetup())
-                return;
-#endif
 
-            //Debug.Log("<b>[SteamVR_Standalone]</b> Initializing SteamVR_Standalone input...");
+            Debug.Log("<b>[SteamVR_Standalone]</b> Initializing SteamVR_Standalone input...");
             initializing = true;
 
             startupFrame = Time.frameCount;
@@ -234,18 +215,18 @@ namespace Valve.VR
             if (initialized == false || isStartupFrame)
                 return;
 
-            if (SteamVR_Standalone.settings.IsInputUpdateMode(SteamVR_UpdateModes.OnUpdate))
+            if (SteamVR.settings.IsInputUpdateMode(SteamVR_UpdateModes.OnUpdate))
             {
                 UpdateNonVisualActions();
             }
-            if (SteamVR_Standalone.settings.IsPoseUpdateMode(SteamVR_UpdateModes.OnUpdate))
+            if (SteamVR.settings.IsPoseUpdateMode(SteamVR_UpdateModes.OnUpdate))
             {
                 UpdateVisualActions();
             }
         }
 
         /// <summary>
-        /// Gets called by SteamVR_Behaviour every LateUpdate and updates actions if the steamvr settings are configured to update then.
+
         /// Also updates skeletons regardless of settings are configured to so we can account for animations on the skeletons.
         /// </summary>
         public static void LateUpdate()
@@ -253,12 +234,12 @@ namespace Valve.VR
             if (initialized == false || isStartupFrame)
                 return;
 
-            if (SteamVR_Standalone.settings.IsInputUpdateMode(SteamVR_UpdateModes.OnLateUpdate))
+            if (SteamVR.settings.IsInputUpdateMode(SteamVR_UpdateModes.OnLateUpdate))
             {
                 UpdateNonVisualActions();
             }
 
-            if (SteamVR_Standalone.settings.IsPoseUpdateMode(SteamVR_UpdateModes.OnLateUpdate))
+            if (SteamVR.settings.IsPoseUpdateMode(SteamVR_UpdateModes.OnLateUpdate))
             {
                 //update poses and skeleton
                 UpdateVisualActions();
@@ -276,12 +257,12 @@ namespace Valve.VR
             if (initialized == false || isStartupFrame)
                 return;
 
-            if (SteamVR_Standalone.settings.IsInputUpdateMode(SteamVR_UpdateModes.OnFixedUpdate))
+            if (SteamVR.settings.IsInputUpdateMode(SteamVR_UpdateModes.OnFixedUpdate))
             {
                 UpdateNonVisualActions();
             }
 
-            if (SteamVR_Standalone.settings.IsPoseUpdateMode(SteamVR_UpdateModes.OnFixedUpdate))
+            if (SteamVR.settings.IsPoseUpdateMode(SteamVR_UpdateModes.OnFixedUpdate))
             {
                 UpdateVisualActions();
             }
@@ -293,11 +274,11 @@ namespace Valve.VR
             if (initialized == false || isStartupFrame)
                 return;
 
-            if (SteamVR_Standalone.settings.IsInputUpdateMode(SteamVR_UpdateModes.OnPreCull))
+            if (SteamVR.settings.IsInputUpdateMode(SteamVR_UpdateModes.OnPreCull))
             {
                 UpdateNonVisualActions();
             }
-            if (SteamVR_Standalone.settings.IsPoseUpdateMode(SteamVR_UpdateModes.OnPreCull))
+            if (SteamVR.settings.IsPoseUpdateMode(SteamVR_UpdateModes.OnPreCull))
             {
                 UpdateVisualActions();
             }
@@ -439,7 +420,7 @@ namespace Valve.VR
 
         #region action accessors
         /// <summary>
-        /// Get an action's action data by the full path to that action. Action paths are in the format /actions/[actionSet]/[direction]/[actionName]
+
         /// </summary>
         /// <typeparam name="T">The type of action you're expecting to get back</typeparam>
         /// <param name="path">The full path to the action you want (Action paths are in the format /actions/[actionSet]/[direction]/[actionName])</param>
@@ -457,7 +438,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get an action set's data by the full path to that action. Action set paths are in the format /actions/[actionSet]
+
         /// </summary>
         /// <param name="path">The full path to the action you want (Action set paths are in the format /actions/[actionSet])</param>
         /// <param name="caseSensitive">case sensitive searches are faster</param>
@@ -473,7 +454,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get an action by the full path to that action. Action paths are in the format /actions/[actionSet]/[direction]/[actionName]
+
         /// </summary>
         /// <typeparam name="T">The type of action you're expecting to get back</typeparam>
         /// <param name="path">The full path to the action you want (Action paths are in the format /actions/[actionSet]/[direction]/[actionName])</param>
@@ -551,7 +532,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get an action by the full path to that action. Action paths are in the format /actions/[actionSet]/[direction]/[actionName]
+
         /// </summary>
         /// <param name="path">The full path to the action you want (Action paths are in the format /actions/[actionSet]/[direction]/[actionName])</param>
         /// <param name="caseSensitive">case sensitive searches are faster</param>
@@ -561,7 +542,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get an action by the full path to that action. Action paths are in the format /actions/[actionSet]/[direction]/[actionName]
+
         /// </summary>
         /// <param name="path">The full path to the action you want (Action paths are in the format /actions/[actionSet]/[direction]/[actionName])</param>
         /// <param name="caseSensitive">case sensitive searches are faster</param>
@@ -571,7 +552,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get an action by the full path to that action. Action paths are in the format /actions/[actionSet]/[direction]/[actionName]
+
         /// </summary>
         /// <param name="path">The full path to the action you want (Action paths are in the format /actions/[actionSet]/[direction]/[actionName])</param>
         /// <param name="caseSensitive">case sensitive searches are faster</param>
@@ -581,7 +562,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get an action by the full path to that action. Action paths are in the format /actions/[actionSet]/[direction]/[actionName]
+
         /// </summary>
         /// <param name="path">The full path to the action you want (Action paths are in the format /actions/[actionSet]/[direction]/[actionName])</param>
         /// <param name="caseSensitive">case sensitive searches are faster</param>
@@ -591,7 +572,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get an action by the full path to that action. Action paths are in the format /actions/[actionSet]/[direction]/[actionName]
+
         /// </summary>
         /// <param name="path">The full path to the action you want (Action paths are in the format /actions/[actionSet]/[direction]/[actionName])</param>
         /// <param name="caseSensitive">case sensitive searches are faster</param>
@@ -601,7 +582,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get an action by the full path to that action. Action paths are in the format /actions/[actionSet]/[direction]/[actionName]
+
         /// </summary>
         /// <param name="path">The full path to the action you want (Action paths are in the format /actions/[actionSet]/[direction]/[actionName])</param>
         /// <param name="caseSensitive">case sensitive searches are faster</param>
@@ -611,7 +592,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get an action by the full path to that action. Action paths are in the format /actions/[actionSet]/[direction]/[actionName]
+
         /// </summary>
         /// <param name="path">The full path to the action you want (Action paths are in the format /actions/[actionSet]/[direction]/[actionName])</param>
         /// <param name="caseSensitive">case sensitive searches are faster</param>
@@ -621,7 +602,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get an action by the full path to that action. Action paths are in the format /actions/[actionSet]/[direction]/[actionName]
+
         /// </summary>
         /// <typeparam name="T">The type of action you're expecting to get back</typeparam>
         /// <param name="path">The full path to the action you want (Action paths are in the format /actions/[actionSet]/[direction]/[actionName])</param>
@@ -705,7 +686,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get an action by the full path to that action. Action paths are in the format /actions/[actionSet]/[direction]/[actionName]
+
         /// </summary>
         /// <typeparam name="T">The type of action you're expecting to get back</typeparam>
         /// <param name="path">The full path to the action you want (Action paths are in the format /actions/[actionSet]/[direction]/[actionName])</param>
@@ -716,7 +697,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get an action by the full path to that action. Action paths are in the format /actions/[actionSet]/[direction]/[actionName]
+
         /// </summary>
         /// <typeparam name="T">The type of action you're expecting to get back</typeparam>
         /// <param name="path">The full path to the action you want (Action paths are in the format /actions/[actionSet]/[direction]/[actionName])</param>
@@ -727,7 +708,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get an action by the full path to that action. Action paths are in the format /actions/[actionSet]/[direction]/[actionName]
+
         /// </summary>
         /// <typeparam name="T">The type of action you're expecting to get back</typeparam>
         /// <param name="path">The full path to the action you want (Action paths are in the format /actions/[actionSet]/[direction]/[actionName])</param>
@@ -738,7 +719,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get an action by the full path to that action. Action paths are in the format /actions/[actionSet]/[direction]/[actionName]
+
         /// </summary>
         /// <typeparam name="T">The type of action you're expecting to get back</typeparam>
         /// <param name="path">The full path to the action you want (Action paths are in the format /actions/[actionSet]/[direction]/[actionName])</param>
@@ -749,7 +730,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get an action by the full path to that action. Action paths are in the format /actions/[actionSet]/[direction]/[actionName]
+
         /// </summary>
         /// <typeparam name="T">The type of action you're expecting to get back</typeparam>
         /// <param name="path">The full path to the action you want (Action paths are in the format /actions/[actionSet]/[direction]/[actionName])</param>
@@ -760,7 +741,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get an action by the full path to that action. Action paths are in the format /actions/[actionSet]/[direction]/[actionName]
+
         /// </summary>
         /// <typeparam name="T">The type of action you're expecting to get back</typeparam>
         /// <param name="path">The full path to the action you want (Action paths are in the format /actions/[actionSet]/[direction]/[actionName])</param>
@@ -771,7 +752,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get an action by the full path to that action. Action paths are in the format /actions/[actionSet]/[direction]/[actionName]
+
         /// </summary>
         /// <typeparam name="T">The type of action you're expecting to get back</typeparam>
         /// <param name="path">The full path to the action you want (Action paths are in the format /actions/[actionSet]/[direction]/[actionName])</param>
@@ -782,7 +763,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get an action by the full path to that action. Action paths are in the format /actions/[actionSet]/[direction]/[actionName]
+
         /// </summary>
         /// <typeparam name="T">The type of action you're expecting to get back</typeparam>
         /// <param name="path">The full path to the action you want (Action paths are in the format /actions/[actionSet]/[direction]/[actionName])</param>
@@ -793,7 +774,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get an action by the full path to that action. Action paths are in the format /actions/[actionSet]/[direction]/[actionName]
+
         /// </summary>
         /// <typeparam name="T">The type of action you're expecting to get back</typeparam>
         /// <param name="path">The full path to the action you want (Action paths are in the format /actions/[actionSet]/[direction]/[actionName])</param>
@@ -804,7 +785,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get an action by the full path to that action. Action paths are in the format /actions/[actionSet]/[direction]/[actionName]
+
         /// </summary>
         /// <typeparam name="T">The type of action you're expecting to get back</typeparam>
         /// <param name="path">The full path to the action you want (Action paths are in the format /actions/[actionSet]/[direction]/[actionName])</param>
@@ -815,7 +796,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get an action by the full path to that action. Action paths are in the format /actions/[actionSet]/[direction]/[actionName]
+
         /// </summary>
         /// <typeparam name="T">The type of action you're expecting to get back</typeparam>
         /// <param name="path">The full path to the action you want (Action paths are in the format /actions/[actionSet]/[direction]/[actionName])</param>
@@ -826,7 +807,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get an action by the full path to that action. Action paths are in the format /actions/[actionSet]/[direction]/[actionName]
+
         /// </summary>
         /// <typeparam name="T">The type of action you're expecting to get back</typeparam>
         /// <param name="path">The full path to the action you want (Action paths are in the format /actions/[actionSet]/[direction]/[actionName])</param>
@@ -837,7 +818,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get an action by the full path to that action. Action paths are in the format /actions/[actionSet]/[direction]/[actionName]
+
         /// </summary>
         /// <typeparam name="T">The type of action you're expecting to get back</typeparam>
         /// <param name="path">The full path to the action you want (Action paths are in the format /actions/[actionSet]/[direction]/[actionName])</param>
@@ -848,7 +829,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get an action by the full path to that action. Action paths are in the format /actions/[actionSet]/[direction]/[actionName]
+
         /// </summary>
         /// <typeparam name="T">The type of action you're expecting to get back</typeparam>
         /// <param name="path">The full path to the action you want (Action paths are in the format /actions/[actionSet]/[direction]/[actionName])</param>
@@ -859,7 +840,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get an action by the full path to that action. Action paths are in the format /actions/[actionSet]/[direction]/[actionName]
+
         /// </summary>
         /// <typeparam name="T">The type of action you're expecting to get back</typeparam>
         /// <param name="path">The full path to the action you want (Action paths are in the format /actions/[actionSet]/[direction]/[actionName])</param>
@@ -870,7 +851,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get an action set by the full path to that action set. Action set paths are in the format /actions/[actionSet]
+
         /// </summary>
         /// <typeparam name="T">The type of action set you're expecting to get back</typeparam>
         /// <param name="actionSetName">The name to the action set you want</param>
@@ -907,7 +888,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get an action set by the full path to that action set. Action set paths are in the format /actions/[actionSet]
+
         /// </summary>
         /// <typeparam name="T">The type of action set you're expecting to get back</typeparam>
         /// <param name="actionSetName">The name to the action set you want</param>
@@ -924,7 +905,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get an action set by the full path to that action set. Action set paths are in the format /actions/[actionSet]
+
         /// </summary>
         /// <typeparam name="T">The type of action set you're expecting to get back</typeparam>
         /// <param name="path">The full path to the action set you want (Action paths are in the format /actions/[actionSet])</param>
@@ -983,7 +964,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get an action set by the full path to that action set. Action set paths are in the format /actions/[actionSet]
+
         /// </summary>
         /// <param name="path">The full path to the action set you want (Action paths are in the format /actions/[actionSet])</param>
         /// <param name="caseSensitive">case sensitive searches are faster</param>
@@ -995,7 +976,7 @@ namespace Valve.VR
 
         #region digital string accessors
         /// <summary>
-        /// Get the state of an action by the action set name, action name, and input source. Optionally case sensitive (for faster results)
+
         /// </summary>
         /// <param name="actionSet">The name of the action set the action is contained in</param>
         /// <param name="action">The name of the action to get the state of</param>
@@ -1013,7 +994,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get the state of an action by the action name and input source. Optionally case sensitive (for faster results)
+
         /// </summary>
         /// <param name="action">The name of the action to get the state of</param>
         /// <param name="inputSource">The input source to get the action state from</param>
@@ -1024,7 +1005,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get the state down of an action by the action set name, action name, and input source. Optionally case sensitive (for faster results)
+
         /// </summary>
         /// <param name="actionSet">The name of the action set the action is contained in</param>
         /// <param name="action">The name of the action to get the state of</param>
@@ -1043,7 +1024,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get the state down of an action by the action name and input source. Optionally case sensitive (for faster results)
+
         /// </summary>
         /// <param name="action">The name of the action to get the state of</param>
         /// <param name="inputSource">The input source to get the action state from</param>
@@ -1055,7 +1036,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get the state up of an action by the action set name, action name, and input source. Optionally case sensitive (for faster results)
+
         /// </summary>
         /// <param name="actionSet">The name of the action set the action is contained in</param>
         /// <param name="action">The name of the action to get the state of</param>
@@ -1075,7 +1056,7 @@ namespace Valve.VR
 
 
         /// <summary>
-        /// Get the state up of an action by the action name and input source. Optionally case sensitive (for faster results)
+
         /// </summary>
         /// <param name="action">The name of the action to get the state of</param>
         /// <param name="inputSource">The input source to get the action state from</param>
@@ -1089,7 +1070,7 @@ namespace Valve.VR
 
         #region analog string accessors
         /// <summary>
-        /// Get the float value of an action by the action set name, action name, and input source. Optionally case sensitive (for faster results). (same as GetSingle)
+
         /// </summary>
         /// <param name="actionSet">The name of the action set the action is contained in</param>
         /// <param name="action">The name of the action to get the state of</param>
@@ -1107,7 +1088,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get the float value of an action by the action name and input source. Optionally case sensitive (for faster results). (same as GetSingle)
+
         /// </summary>
         /// <param name="action">The name of the action to get the state of</param>
         /// <param name="inputSource">The input source to get the action state from</param>
@@ -1118,7 +1099,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get the float value of an action by the action set name, action name, and input source. Optionally case sensitive (for faster results). (same as GetFloat)
+
         /// </summary>
         /// <param name="actionSet">The name of the action set the action is contained in</param>
         /// <param name="action">The name of the action to get the state of</param>
@@ -1136,7 +1117,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get the float value of an action by the action name and input source. Optionally case sensitive (for faster results). (same as GetFloat)
+
         /// </summary>
         /// <param name="action">The name of the action to get the state of</param>
         /// <param name="inputSource">The input source to get the action state from</param>
@@ -1147,7 +1128,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get the Vector2 value of an action by the action set name, action name, and input source. Optionally case sensitive (for faster results)
+
         /// </summary>
         /// <param name="actionSet">The name of the action set the action is contained in</param>
         /// <param name="action">The name of the action to get the state of</param>
@@ -1165,7 +1146,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get the Vector2 value of an action by the action name and input source. Optionally case sensitive (for faster results)
+
         /// </summary>
         /// <param name="action">The name of the action to get the state of</param>
         /// <param name="inputSource">The input source to get the action state from</param>
@@ -1176,7 +1157,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get the Vector3 value of an action by the action set name, action name, and input source. Optionally case sensitive (for faster results)
+
         /// </summary>
         /// <param name="actionSet">The name of the action set the action is contained in</param>
         /// <param name="action">The name of the action to get the state of</param>
@@ -1194,7 +1175,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get the Vector3 value of an action by the action name and input source. Optionally case sensitive (for faster results)
+
         /// </summary>
         /// <param name="action">The name of the action to get the state of</param>
         /// <param name="inputSource">The input source to get the action state from</param>
@@ -1279,7 +1260,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Gets the localized name of the device that the action corresponds to.
+
         /// </summary>
         /// <param name="inputSource"></param>
         /// <param name="localizedParts">
@@ -1305,60 +1286,6 @@ namespace Valve.VR
 
         public static bool CheckOldLocation()
         {
-#if UNITY_EDITOR
-            DirectoryInfo dataPath = new DirectoryInfo(Application.dataPath);
-            string projectRoot = dataPath.Parent.FullName;
-
-            string fullOldActionsPath = Path.Combine(projectRoot, SteamVR_Settings.instance.actionsFilePath);
-            if (File.Exists(fullOldActionsPath))
-            {
-                SteamVR_Input_ActionFile oldActionsFile = SteamVR_Input_ActionFile.Open(fullOldActionsPath);
-                string[] actionAndBindingFiles = oldActionsFile.GetFilesToCopy(true);
-
-                string newActionsFilePath = GetActionsFilePath(true);
-                bool shouldCopy = true;
-                bool verified = false;
-                if (File.Exists(newActionsFilePath))
-                {
-                    shouldCopy = UnityEditor.EditorUtility.DisplayDialog("SteamVR_Standalone", "SteamVR_Standalone Unity Plugin detected an Action Manifest file in the legacy location (project root). You also have an Action Manifest File in the new location (streaming assets). Would you like to overwrite the files in streaming assets?", "Yes", "No");
-                    verified = true;
-                }
-
-                if (shouldCopy)
-                {
-                    string newFolderPath = GetActionsFileFolder();
-
-                    foreach (string filePath in actionAndBindingFiles)
-                    {
-                        FileInfo oldFile = new FileInfo(filePath);
-                        string newFilePath = Path.Combine(newFolderPath, oldFile.Name);
-
-                        if (File.Exists(newFilePath))
-                        {
-                            FileInfo newFile = new FileInfo(newFilePath);
-                            newFile.IsReadOnly = false;
-
-                            newFile.Delete();
-                        }
-
-                        oldFile.IsReadOnly = false;
-                        oldFile.MoveTo(newFilePath);
-                    }
-
-                    if (verified == false)
-                    {
-                        UnityEditor.EditorUtility.DisplayDialog("SteamVR_Standalone", "SteamVR_Standalone Unity Plugin detected an Action Manifest file in the legacy location (project root). We've automatically moved the files to the new location (" + GetActionsFileFolder() + ").", "Ok");
-                    }
-                    else
-                    {
-                        UnityEditor.EditorUtility.DisplayDialog("SteamVR_Standalone", "Moving files to the new location (" + GetActionsFileFolder() + ") is complete.", "Ok");
-                    }
-
-                    UnityEditor.AssetDatabase.Refresh();
-                    return true;
-                }
-            }
-#endif
             return false;
         }
 
@@ -1574,82 +1501,5 @@ namespace Valve.VR
 
             OpenVR.Input.OpenBindingUI(null, actionSetHandle, deviceHandle, false);
         }
-
-#if UNITY_EDITOR
-        public static string GetResourcesFolderPath(bool fromAssetsDirectory = false)
-        {
-            string inputFolder = string.Format("Assets/{0}", SteamVR_Settings.instance.steamVRInputPath);
-
-            string path = Path.Combine(inputFolder, "Resources");
-
-            bool createdDirectory = false;
-            if (Directory.Exists(inputFolder) == false)
-            {
-                Directory.CreateDirectory(inputFolder);
-                createdDirectory = true;
-            }
-
-
-            if (Directory.Exists(path) == false)
-            {
-                Directory.CreateDirectory(path);
-                createdDirectory = true;
-            }
-
-            if (createdDirectory)
-                UnityEditor.AssetDatabase.Refresh();
-
-            if (fromAssetsDirectory == false)
-                return path.Replace("Assets/", "");
-            else
-                return path;
-        }
-
-
-
-        private static bool checkingSetup = false;
-        private static bool openingSetup = false;
-        public static bool IsOpeningSetup() { return openingSetup; }
-        private static void CheckSetup()
-        {
-            if (checkingSetup == false && openingSetup == false && (SteamVR_Input.actions == null || SteamVR_Input.actions.Length == 0))
-            {
-                checkingSetup = true;
-                Debug.Break();
-
-                bool open = UnityEditor.EditorUtility.DisplayDialog("[SteamVR_Standalone]", "It looks like you haven't generated actions for SteamVR_Standalone Input yet. Would you like to open the SteamVR_Standalone Input window?", "Yes", "No");
-                if (open)
-                {
-                    openingSetup = true;
-                    UnityEditor.EditorApplication.isPlaying = false;
-                    Type editorWindowType = FindType("Valve.VR.SteamVR_Input_EditorWindow");
-                    if (editorWindowType != null)
-                    {
-                        var window = UnityEditor.EditorWindow.GetWindow(editorWindowType, false, "SteamVR_Standalone Input", true);
-                        if (window != null)
-                            window.Show();
-                    }
-                }
-                else
-                {
-                    Debug.LogError("<b>[SteamVR_Standalone]</b> This version of SteamVR_Standalone will not work if you do not create and generate actions. Please open the SteamVR_Standalone Input window or downgrade to version 1.2.3 (on github)");
-                }
-                checkingSetup = false;
-            }
-        }
-
-        private static Type FindType(string typeName)
-        {
-            var type = Type.GetType(typeName);
-            if (type != null) return type;
-            foreach (var a in AppDomain.CurrentDomain.GetAssemblies())
-            {
-                type = a.GetType(typeName);
-                if (type != null)
-                    return type;
-            }
-            return null;
-        }
-#endif
     }
 }

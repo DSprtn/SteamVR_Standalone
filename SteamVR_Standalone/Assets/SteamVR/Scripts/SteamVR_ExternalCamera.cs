@@ -212,7 +212,7 @@ namespace Valve.VR
             while (offset.childCount > 0)
                 DestroyImmediate(offset.GetChild(0).gameObject);
 
-            // Setup clipping quad (using camera clip causes problems with shadows).
+
             clipQuad = GameObject.CreatePrimitive(PrimitiveType.Quad);
             clipQuad.name = "ClipQuad";
             DestroyImmediate(clipQuad.GetComponent<MeshCollider>());

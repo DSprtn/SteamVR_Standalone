@@ -7,12 +7,12 @@ using UnityEngine;
 
 namespace Valve.VR
 {
-    // Token: 0x020002E7 RID: 743
+
     [RequireComponent(typeof(Camera))]
     public class SteamVR_Camera : MonoBehaviour
     {
-        // Token: 0x170001D1 RID: 465
-        // (get) Token: 0x06000DF0 RID: 3568 RVA: 0x00008D64 File Offset: 0x00006F64
+
+
         public Transform head
         {
             get
@@ -21,8 +21,8 @@ namespace Valve.VR
             }
         }
 
-        // Token: 0x170001D2 RID: 466
-        // (get) Token: 0x06000DF1 RID: 3569 RVA: 0x00008D64 File Offset: 0x00006F64
+
+
         public Transform offset
         {
             get
@@ -31,8 +31,6 @@ namespace Valve.VR
             }
         }
 
-        // Token: 0x170001D3 RID: 467
-        // (get) Token: 0x06000DF2 RID: 3570 RVA: 0x00008D6C File Offset: 0x00006F6C
         public Transform origin
         {
             get
@@ -41,13 +39,8 @@ namespace Valve.VR
             }
         }
 
-        // Token: 0x170001D4 RID: 468
-        // (get) Token: 0x06000DF3 RID: 3571 RVA: 0x00008D79 File Offset: 0x00006F79
-        // (set) Token: 0x06000DF4 RID: 3572 RVA: 0x00008D81 File Offset: 0x00006F81
         public Camera camera { get; private set; }
 
-        // Token: 0x170001D5 RID: 469
-        // (get) Token: 0x06000DF5 RID: 3573 RVA: 0x00008D8A File Offset: 0x00006F8A
         public Transform ears
         {
             get
@@ -56,15 +49,12 @@ namespace Valve.VR
             }
         }
 
-        // Token: 0x06000DF6 RID: 3574 RVA: 0x00008D92 File Offset: 0x00006F92
+
         public Ray GetRay()
         {
             return new Ray(this._head.position, this._head.forward);
         }
 
-        // Token: 0x170001D6 RID: 470
-        // (get) Token: 0x06000DF7 RID: 3575 RVA: 0x00008DAF File Offset: 0x00006FAF
-        // (set) Token: 0x06000DF8 RID: 3576 RVA: 0x00008DB6 File Offset: 0x00006FB6
         public static float sceneResolutionScale
         {
             get
@@ -77,16 +67,14 @@ namespace Valve.VR
             }
         }
 
-        // Token: 0x06000DF9 RID: 3577 RVA: 0x00008DBE File Offset: 0x00006FBE
         private void OnDisable()
         {
             SteamVR_Render.Remove(this);
         }
 
-        // Token: 0x06000DFA RID: 3578 RVA: 0x00018FA0 File Offset: 0x000171A0
         private void OnEnable()
         {
-            SteamVR_Standalone instance = SteamVR_Standalone.instance;
+            SteamVR instance = SteamVR.instance;
             if (instance == null)
             {
                 if (this.head != null)
@@ -104,7 +92,7 @@ namespace Valve.VR
             this.Expand();
             if (SteamVR_Camera.blitMaterial == null)
             {
-                SteamVR_Camera.blitMaterial = new Material(VRShaders.blit);
+                SteamVR_Camera.blitMaterial = new Material(VRShaders.GetShader(VRShaders.VRShader.blit));
             }
             Camera component = base.GetComponent<Camera>();
             component.fieldOfView = instance.fieldOfView;
@@ -137,14 +125,13 @@ namespace Valve.VR
             SteamVR_Render.Add(this);
         }
 
-        // Token: 0x06000DFB RID: 3579 RVA: 0x00008DC6 File Offset: 0x00006FC6
         private void Awake()
         {
             this.camera = base.GetComponent<Camera>();
+
             this.ForceLast();
         }
 
-        // Token: 0x06000DFC RID: 3580 RVA: 0x000190F4 File Offset: 0x000172F4
         public void ForceLast()
         {
             if (SteamVR_Camera.values != null)
@@ -191,8 +178,6 @@ namespace Valve.VR
             }
         }
 
-        // Token: 0x170001D7 RID: 471
-        // (get) Token: 0x06000DFD RID: 3581 RVA: 0x00008DDA File Offset: 0x00006FDA
         public string baseName
         {
             get
@@ -205,7 +190,6 @@ namespace Valve.VR
             }
         }
 
-        // Token: 0x06000DFE RID: 3582 RVA: 0x00019288 File Offset: 0x00017488
         public void Expand()
         {
             Transform transform = base.transform.parent;
@@ -284,7 +268,6 @@ namespace Valve.VR
             }
         }
 
-        // Token: 0x06000DFF RID: 3583 RVA: 0x00019588 File Offset: 0x00017788
         public void Collapse()
         {
             base.transform.parent = null;
@@ -326,10 +309,9 @@ namespace Valve.VR
             }
         }
 
-        // Token: 0x06000E01 RID: 3585 RVA: 0x000196E4 File Offset: 0x000178E4
         public static RenderTexture GetSceneTexture(bool hdr)
         {
-            SteamVR_Standalone instance = SteamVR_Standalone.instance;
+            SteamVR instance = SteamVR.instance;
             if (instance == null)
             {
                 return null;
@@ -347,17 +329,17 @@ namespace Valve.VR
             {
                 SteamVR_Camera._sceneTexture = new RenderTexture(num, num2, 0, renderTextureFormat);
                 SteamVR_Camera._sceneTexture.antiAliasing = num3;
-                SteamVR_Standalone.Unity.SetColorSpace((hdr && QualitySettings.activeColorSpace == ColorSpace.Gamma) ? EColorSpace.Gamma : EColorSpace.Auto);
+                SteamVR.Unity.SetColorSpace((hdr && QualitySettings.activeColorSpace == ColorSpace.Gamma) ? EColorSpace.Gamma : EColorSpace.Auto);
             }
             return SteamVR_Camera._sceneTexture;
         }
 
-        // Token: 0x06000E02 RID: 3586 RVA: 0x000197C4 File Offset: 0x000179C4
+
         private void OnPreRender()
         {
             if (this.flip)
             {
-                this.flip.enabled = (SteamVR_Render.Top() == this && SteamVR_Standalone.instance.textureType == ETextureType.DirectX);
+                this.flip.enabled = (SteamVR_Render.Top() == this && SteamVR.instance.textureType == ETextureType.DirectX);
             }
             Camera component = this.head.GetComponent<Camera>();
             if (component != null)
@@ -370,7 +352,6 @@ namespace Valve.VR
             }
         }
 
-        // Token: 0x06000E03 RID: 3587 RVA: 0x00008E17 File Offset: 0x00007017
         private void OnPostRender()
         {
             if (this.wireframe)
@@ -379,13 +360,11 @@ namespace Valve.VR
             }
         }
 
-        // Token: 0x06000E04 RID: 3588 RVA: 0x00008E27 File Offset: 0x00007027
         private void OnRenderImage(RenderTexture src, RenderTexture dest)
         {
             this.DoRenderTextureThing(src, dest);
         }
 
-        // Token: 0x06000E05 RID: 3589 RVA: 0x0001983C File Offset: 0x00017A3C
         public void DoRenderTextureThing(RenderTexture src, RenderTexture dest)
         {
             if (SteamVR_Render.Top() == this)
@@ -421,43 +400,39 @@ namespace Valve.VR
             Graphics.SetRenderTarget(null);
         }
 
-        // Token: 0x04000DA6 RID: 3494
+
         [SerializeField]
         private Transform _head;
 
-        // Token: 0x04000DA8 RID: 3496
         [SerializeField]
         private Transform _ears;
 
-        // Token: 0x04000DA9 RID: 3497
         public bool wireframe;
 
-        // Token: 0x04000DAA RID: 3498
         private static Hashtable values;
 
-        // Token: 0x04000DAB RID: 3499
         private const string eyeSuffix = " (eye)";
 
-        // Token: 0x04000DAC RID: 3500
+
         private const string earsSuffix = " (ears)";
 
-        // Token: 0x04000DAD RID: 3501
+
         private const string headSuffix = " (head)";
 
-        // Token: 0x04000DAE RID: 3502
+
         private const string originSuffix = " (origin)";
 
-        // Token: 0x04000DAF RID: 3503
+
         private static RenderTexture _sceneTexture;
 
-        // Token: 0x04000DB0 RID: 3504
+
         [SerializeField]
         private SteamVR_CameraFlip flip;
 
-        // Token: 0x04000DB1 RID: 3505
+
         public static Material blitMaterial;
 
-        // Token: 0x04000DB2 RID: 3506
+
         public static bool useHeadTracking = true;
     }
 }

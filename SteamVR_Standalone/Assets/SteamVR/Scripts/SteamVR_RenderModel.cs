@@ -87,7 +87,7 @@ namespace Valve.VR
                     if (_instance == null && !failedLoadInterface)
                     {
                         if (Application.isEditor && Application.isPlaying == false)
-                            needsShutdown = SteamVR_Standalone.InitializeTemporarySession();
+                            needsShutdown = SteamVR.InitializeTemporarySession();
 
                         _instance = OpenVR.RenderModels;
                         if (_instance == null)
@@ -102,7 +102,7 @@ namespace Valve.VR
             public void Dispose()
             {
                 if (needsShutdown)
-                    SteamVR_Standalone.ExitTemporarySession();
+                    SteamVR.ExitTemporarySession();
             }
         }
 

@@ -83,7 +83,7 @@ namespace Valve.VR
                 for (int i = 0; i < 6; i++)
                 {
                     textures[i].handle = (handles[i] != null) ? handles[i].GetNativeTexturePtr() : System.IntPtr.Zero;
-                    textures[i].eType = SteamVR_Standalone.instance.textureType;
+                    textures[i].eType = SteamVR.instance.textureType;
                     textures[i].eColorSpace = EColorSpace.Auto;
                 }
                 var error = compositor.SetSkyboxOverride(textures);

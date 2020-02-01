@@ -154,7 +154,7 @@ namespace Valve.VR.InteractionSystem
         //-------------------------------------------------
         public AudioClip PlayLooping()
         {
-            // get audio source properties, and do any special randomizations
+
             SetAudioSource();
 
             // if the audio source has forgotten to be set to looping, set it to looping

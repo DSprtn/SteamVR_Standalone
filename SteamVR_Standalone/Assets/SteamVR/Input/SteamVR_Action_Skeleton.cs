@@ -118,7 +118,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get the accuracy level of the skeletal tracking data.
+
         /// <para/>* Estimated: Body part location can’t be directly determined by the device. Any skeletal pose provided by the device is estimated based on the active buttons, triggers, joysticks, or other input sensors. Examples include the Vive Controller and gamepads.
         /// <para/>* Partial: Body part location can be measured directly but with fewer degrees of freedom than the actual body part.Certain body part positions may be unmeasured by the device and estimated from other input data.Examples include Knuckles or gloves that only measure finger curl
         /// <para/>* Full: Body part location can be measured directly throughout the entire range of motion of the body part.Examples include hi-end mocap systems, or gloves that measure the rotation of each finger segment.
@@ -329,7 +329,7 @@ namespace Valve.VR
         public int boneCount { get { return (int)GetBoneCount(); } }
 
         /// <summary>
-        /// Gets the bone positions in local space. This array may be modified later so if you want to hold this data then pass true to get a copy of the data instead of the actual array
+
         /// </summary>
         /// <param name="copy">This array may be modified later so if you want to hold this data then pass true to get a copy of the data instead of the actual array</param>
         public Vector3[] GetBonePositions(bool copy = false)
@@ -341,7 +341,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Gets the bone rotations in local space. This array may be modified later so if you want to hold this data then pass true to get a copy of the data instead of the actual array
+
         /// </summary>
         /// <param name="copy">This array may be modified later so if you want to hold this data then pass true to get a copy of the data instead of the actual array</param>
         public Quaternion[] GetBoneRotations(bool copy = false)
@@ -353,7 +353,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Gets the bone positions in local space from the previous update. This array may be modified later so if you want to hold this data then pass true to get a copy of the data instead of the actual array
+
         /// </summary>
         /// <param name="copy">This array may be modified later so if you want to hold this data then pass true to get a copy of the data instead of the actual array</param>
         public Vector3[] GetLastBonePositions(bool copy = false)
@@ -365,7 +365,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Gets the bone rotations in local space from the previous update. This array may be modified later so if you want to hold this data then pass true to get a copy of the data instead of the actual array
+
         /// </summary>
         /// <param name="copy">This array may be modified later so if you want to hold this data then pass true to get a copy of the data instead of the actual array</param>
         public Quaternion[] GetLastBoneRotations(bool copy = false)
@@ -377,7 +377,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Set the range of the motion of the bones in this skeleton. Options are "With Controller" as if your hand is holding your VR controller.
+
         /// Or "Without Controller" as if your hand is empty. This will set the range for the following update.
         /// </summary>
         public void SetRangeOfMotion(EVRSkeletalMotionRange range)
@@ -386,7 +386,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Sets the space that you'll get bone data back in. Options are relative to the Model and relative to the Parent bone
+
         /// </summary>
         /// <param name="space">the space that you'll get bone data back in. Options are relative to the Model and relative to the Parent bone.</param>
         public void SetSkeletalTransformSpace(EVRSkeletalTransformSpace space)
@@ -430,7 +430,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get the accuracy level of the skeletal tracking data.
+
         /// </summary>
         /// <returns>
         /// <list type="bullet">
@@ -574,7 +574,7 @@ namespace Valve.VR
 
 
         /// <summary>
-        /// Gets the localized name of the device that the action corresponds to. Include as many EVRInputStringBits as you want to add to the localized string
+
         /// </summary>
         /// <param name="localizedParts">
         /// <list type="bullet">
@@ -986,7 +986,7 @@ namespace Valve.VR
         public int boneCount { get { return (int)GetBoneCount(); } }
 
         /// <summary>
-        /// Gets the number of bones in the skeleton for this action
+
         /// </summary>
         public uint GetBoneCount()
         {
@@ -999,12 +999,12 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Gets the ordering of the bone hierarchy
+
         /// </summary>
         public int[] boneHierarchy { get { return GetBoneHierarchy(); } }
 
         /// <summary>
-        /// Gets the ordering of the bone hierarchy
+
         /// </summary>
         public int[] GetBoneHierarchy()
         {
@@ -1019,7 +1019,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Gets the name for a bone at the specified index
+
         /// </summary>
         public string GetBoneName(int boneIndex)
         {
@@ -1067,7 +1067,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get the accuracy level of the skeletal tracking data.
+
         /// <para/>* Estimated: Body part location can’t be directly determined by the device. Any skeletal pose provided by the device is estimated based on the active buttons, triggers, joysticks, or other input sensors. Examples include the Vive Controller and gamepads.
         /// <para/>* Partial: Body part location can be measured directly but with fewer degrees of freedom than the actual body part.Certain body part positions may be unmeasured by the device and estimated from other input data.Examples include Knuckles or gloves that only measure finger curl
         /// <para/>* Full: Body part location can be measured directly throughout the entire range of motion of the body part.Examples include hi-end mocap systems, or gloves that measure the rotation of each finger segment.
@@ -1075,7 +1075,7 @@ namespace Valve.VR
         public EVRSkeletalTrackingLevel skeletalTrackingLevel { get { return GetSkeletalTrackingLevel(); } }
 
         /// <summary>
-        /// Get the accuracy level of the skeletal tracking data.
+
         /// <para/>* Estimated: Body part location can’t be directly determined by the device. Any skeletal pose provided by the device is estimated based on the active buttons, triggers, joysticks, or other input sensors. Examples include the Vive Controller and gamepads.
         /// <para/>* Partial: Body part location can be measured directly but with fewer degrees of freedom than the actual body part.Certain body part positions may be unmeasured by the device and estimated from other input data.Examples include Knuckles or gloves that only measure finger curl
         /// <para/>* Full: Body part location can be measured directly throughout the entire range of motion of the body part.Examples include hi-end mocap systems, or gloves that measure the rotation of each finger segment.
@@ -1092,7 +1092,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get the skeletal summary data structure from OpenVR.
+
         /// Contains curl and splay data in finger order: thumb, index, middlg, ring, pinky.
         /// Easier access at named members: indexCurl, ringSplay, etc.
         /// </summary>
@@ -1157,7 +1157,7 @@ namespace Valve.VR
     public interface ISteamVR_Action_Skeleton_Source
     {
         /// <summary>
-        /// Get the accuracy level of the skeletal tracking data.
+
         /// <para/>* Estimated: Body part location can’t be directly determined by the device. Any skeletal pose provided by the device is estimated based on the active buttons, triggers, joysticks, or other input sensors. Examples include the Vive Controller and gamepads.
         /// <para/>* Partial: Body part location can be measured directly but with fewer degrees of freedom than the actual body part.Certain body part positions may be unmeasured by the device and estimated from other input data.Examples include Knuckles or gloves that only measure finger curl
         /// <para/>* Full: Body part location can be measured directly throughout the entire range of motion of the body part.Examples include hi-end mocap systems, or gloves that measure the rotation of each finger segment.

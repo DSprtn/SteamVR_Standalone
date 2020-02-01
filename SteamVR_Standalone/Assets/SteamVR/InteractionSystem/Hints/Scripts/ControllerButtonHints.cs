@@ -134,7 +134,7 @@ namespace Valve.VR.InteractionSystem
         }
 
         //-------------------------------------------------
-        // Gets called when the hand has been initialized and a render model has been set
+
         //-------------------------------------------------
         private void OnHandInitialized(int deviceIndex)
         {

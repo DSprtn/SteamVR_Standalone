@@ -79,7 +79,7 @@ namespace Valve.VR
                 if (videostream.handle == 0)
                     return;
 
-                var vr = SteamVR_Standalone.instance;
+                var vr = SteamVR.instance;
                 if (vr == null)
                     return;
 

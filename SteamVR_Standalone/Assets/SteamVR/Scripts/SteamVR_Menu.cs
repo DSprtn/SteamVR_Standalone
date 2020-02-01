@@ -138,9 +138,9 @@ namespace Valve.VR
             }
             GUILayout.EndHorizontal();
 
-            if (SteamVR_Standalone.active)
+            if (SteamVR.active)
             {
-                var vr = SteamVR_Standalone.instance;
+                var vr = SteamVR.instance;
 
                 GUILayout.BeginHorizontal();
                 {
@@ -163,10 +163,10 @@ namespace Valve.VR
             {
                 tracker.wireframe = GUILayout.Toggle(tracker.wireframe, "Wireframe");
 
-                if (SteamVR_Standalone.settings.trackingSpace == ETrackingUniverseOrigin.TrackingUniverseSeated)
+                if (SteamVR.settings.trackingSpace == ETrackingUniverseOrigin.TrackingUniverseSeated)
                 {
                     if (GUILayout.Button("Switch to Standing"))
-                        SteamVR_Standalone.settings.trackingSpace = ETrackingUniverseOrigin.TrackingUniverseStanding;
+                        SteamVR.settings.trackingSpace = ETrackingUniverseOrigin.TrackingUniverseStanding;
                     if (GUILayout.Button("Center View"))
                     {
                         var system = OpenVR.System;
@@ -177,7 +177,7 @@ namespace Valve.VR
                 else
                 {
                     if (GUILayout.Button("Switch to Seated"))
-                        SteamVR_Standalone.settings.trackingSpace = ETrackingUniverseOrigin.TrackingUniverseSeated;
+                        SteamVR.settings.trackingSpace = ETrackingUniverseOrigin.TrackingUniverseSeated;
                 }
             }
 

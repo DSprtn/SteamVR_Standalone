@@ -85,7 +85,7 @@ namespace Valve.VR
 
         protected virtual void OnEnable()
         {
-            SteamVR_Standalone.Initialize();
+            SteamVR.Initialize();
 
             if (poseAction != null)
             {
@@ -235,7 +235,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Gets the localized name of the device that the action corresponds to.
+
         /// </summary>
         /// <param name="localizedParts">
         /// <list type="bullet">

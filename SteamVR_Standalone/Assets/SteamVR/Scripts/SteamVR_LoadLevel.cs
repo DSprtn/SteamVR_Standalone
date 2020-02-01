@@ -165,7 +165,7 @@ namespace Valve.VR
                     {
                         var texture = new Texture_t();
                         texture.handle = renderTexture.GetNativeTexturePtr();
-                        texture.eType = SteamVR_Standalone.instance.textureType;
+                        texture.eType = SteamVR.instance.textureType;
                         texture.eColorSpace = EColorSpace.Auto;
                         overlay.SetOverlayTexture(progressBarOverlayHandle, ref texture);
                     }
@@ -274,7 +274,7 @@ namespace Valve.VR
                 {
                     var texture = new Texture_t();
                     texture.handle = loadingScreen.GetNativeTexturePtr();
-                    texture.eType = SteamVR_Standalone.instance.textureType;
+                    texture.eType = SteamVR.instance.textureType;
                     texture.eColorSpace = EColorSpace.Auto;
                     overlay.SetOverlayTexture(loadingScreenOverlayHandle, ref texture);
                 }
@@ -302,7 +302,7 @@ namespace Valve.VR
                     // Otherwise, use the specified background color.
                     if (showGrid)
                     {
-                        // Set compositor background color immediately, and start fading to it.
+
                         compositor.FadeToColor(0.0f, backgroundColor.r, backgroundColor.g, backgroundColor.b, backgroundColor.a, true);
                         compositor.FadeGrid(fadeOutTime, true);
                         yield return new WaitForSeconds(fadeOutTime);
@@ -467,7 +467,7 @@ namespace Valve.VR
                 overlay.SetOverlayWidthInMeters(handle, widthInMeters);
 
                 // D3D textures are upside-down in Unity to match OpenGL.
-                if (SteamVR_Standalone.instance.textureType == ETextureType.DirectX)
+                if (SteamVR.instance.textureType == ETextureType.DirectX)
                 {
                     var textureBounds = new VRTextureBounds_t();
                     textureBounds.uMin = 0;
@@ -487,12 +487,12 @@ namespace Valve.VR
                     offset.pos.z /= vrcam.origin.localScale.z;
 
                     var t = offset.ToHmdMatrix34();
-                    overlay.SetOverlayTransformAbsolute(handle, SteamVR_Standalone.settings.trackingSpace, ref t);
+                    overlay.SetOverlayTransformAbsolute(handle, SteamVR.settings.trackingSpace, ref t);
                 }
                 else
                 {
                     var t = new SteamVR_Utils.RigidTransform(transform).ToHmdMatrix34();
-                    overlay.SetOverlayTransformAbsolute(handle, SteamVR_Standalone.settings.trackingSpace, ref t);
+                    overlay.SetOverlayTransformAbsolute(handle, SteamVR.settings.trackingSpace, ref t);
                 }
             }
 

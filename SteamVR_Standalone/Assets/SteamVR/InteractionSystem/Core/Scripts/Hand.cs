@@ -698,7 +698,7 @@ namespace Valve.VR.InteractionSystem
 
 
         //-------------------------------------------------
-        // Get the world velocity of the VR Hand.
+
         //-------------------------------------------------
         public Vector3 GetTrackedObjectVelocity(float timeOffset = 0)
         {
@@ -728,7 +728,7 @@ namespace Valve.VR.InteractionSystem
 
 
         //-------------------------------------------------
-        // Get the world space angular velocity of the VR Hand.
+
         //-------------------------------------------------
         public Vector3 GetTrackedObjectAngularVelocity(float timeOffset = 0)
         {

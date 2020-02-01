@@ -9,24 +9,25 @@ using Valve.VR;
 
 namespace Standalone
 {
-    // Token: 0x020003C2 RID: 962
+
     [RequireComponent(typeof(Camera))]
     public class SteamVR_GameView : MonoBehaviour
     {
-        // Token: 0x0600133A RID: 4922 RVA: 0x0003271C File Offset: 0x0003091C
+
         private void OnEnable()
         {
             if (SteamVR_GameView.overlayMaterial == null)
             {
-                SteamVR_GameView.overlayMaterial = new Material(VRShaders.overlay);
+                SteamVR_GameView.overlayMaterial = new Material(VRShaders.GetShader(VRShaders.VRShader.overlay));
             }
             if (SteamVR_GameView.mirrorTexture == null)
             {
-                SteamVR_Standalone instance = SteamVR_Standalone.instance;
+                SteamVR instance = SteamVR.instance;
                 if (instance != null && instance.textureType == ETextureType.DirectX)
                 {
                     Texture2D texture2D = new Texture2D(2, 2);
                     IntPtr zero = IntPtr.Zero;
+                    
                     if (instance.compositor.GetMirrorTextureD3D11(EVREye.Eye_Left, texture2D.GetNativeTexturePtr(), ref zero) == EVRCompositorError.None)
                     {
                         uint width = 0u;
@@ -38,10 +39,10 @@ namespace Standalone
             }
         }
 
-        // Token: 0x0600133B RID: 4923 RVA: 0x000327AC File Offset: 0x000309AC
+
         private void OnPostRender()
         {
-            SteamVR_Standalone instance = SteamVR_Standalone.instance;
+            SteamVR instance = SteamVR.instance;
             Camera component = base.GetComponent<Camera>();
             float num = this.scale * component.aspect / instance.aspect;
             float x = -this.scale;
@@ -97,16 +98,16 @@ namespace Standalone
             }
         }
 
-        // Token: 0x040013A5 RID: 5029
-        public float scale = 1.5f;
 
-        // Token: 0x040013A6 RID: 5030
+        public float scale = 1.2f;
+
+
         public bool drawOverlay = true;
 
-        // Token: 0x040013A7 RID: 5031
+
         private static Material overlayMaterial;
 
-        // Token: 0x040013A8 RID: 5032
+
         private static Texture2D mirrorTexture;
     }
 }

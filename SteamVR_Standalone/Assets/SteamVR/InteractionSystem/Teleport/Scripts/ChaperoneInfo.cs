@@ -53,7 +53,7 @@ namespace Valve.VR.InteractionSystem
             //ChaperoneInfo.Initialized.Send();
             //yield break;
 
-            // Get interface pointer
+
             var chaperone = OpenVR.Chaperone;
             if (chaperone == null)
             {
@@ -62,7 +62,7 @@ namespace Valve.VR.InteractionSystem
                 yield break;
             }
 
-            // Get play area size
+
             while (true)
             {
                 float px = 0.0f, pz = 0.0f;

@@ -75,7 +75,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Gets the device index for the controller this action is bound to. This can be used for render models or the pose tracking system.
+
         /// </summary>
         /// <param name="inputSource">The device you would like to get data from. Any if the action is not device specific.</param>
         public virtual uint GetDeviceIndex(SteamVR_Input_Sources inputSource)
@@ -103,7 +103,7 @@ namespace Valve.VR
 
 
         /// <summary>
-        /// Gets the localized name of the device that the action corresponds to. Include as many EVRInputStringBits as you want to add to the localized string
+
         /// </summary>
         /// <param name="inputSource"></param>
         /// <param name="localizedParts">
@@ -120,7 +120,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Gets the localized full name of the device that the action was updated by. ex: "Left Hand Vive Controller Trackpad"
+
         /// </summary>
         /// <param name="inputSource">The device you would like to get data from. Any if the action is not device specific.</param>
         public string GetLocalizedOrigin(SteamVR_Input_Sources inputSource)
@@ -261,7 +261,7 @@ namespace Valve.VR
         public string renderModelComponentName { get { UpdateOriginTrackedDeviceInfo(); return inputOriginInfo.rchRenderModelComponentName; } }
 
         /// <summary>
-        /// Gets the localized full name of the device that the action was updated by. ex: "Left Hand Vive Controller Trackpad"
+
         /// </summary>
         public string localizedOriginName { get { UpdateOriginTrackedDeviceInfo(); return GetLocalizedOrigin(); } }
 
@@ -303,7 +303,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Gets the localized name of the device that the action corresponds to. Include as many EVRInputStringBits as you want to add to the localized string
+
         /// </summary>
         /// <param name="inputSource"></param>
         /// <param name="localizedParts">
@@ -327,7 +327,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Gets the localized full name of the device that the action was updated by. ex: "Left Hand Vive Controller Trackpad"
+
         /// </summary>
         public string GetLocalizedOrigin()
         {
@@ -363,7 +363,7 @@ namespace Valve.VR
         SteamVR_Input_Sources GetActiveDevice(SteamVR_Input_Sources inputSource);
 
         /// <summary>
-        /// Gets the device index for the controller this action is bound to. This can be used for render models or the pose tracking system.
+
         /// </summary>
         /// <param name="inputSource">The device you would like to get data from. Any if the action is not device specific.</param>
         uint GetDeviceIndex(SteamVR_Input_Sources inputSource);
@@ -376,7 +376,7 @@ namespace Valve.VR
 
 
         /// <summary>
-        /// Gets the localized name of the device that the action corresponds to. Include as many EVRInputStringBits as you want to add to the localized string
+
         /// </summary>
         /// <param name="inputSource"></param>
         /// <param name="localizedParts">
@@ -390,7 +390,7 @@ namespace Valve.VR
         string GetLocalizedOriginPart(SteamVR_Input_Sources inputSource, params EVRInputStringBits[] localizedParts);
 
         /// <summary>
-        /// Gets the localized full name of the device that the action was updated by. ex: "Left Hand Vive Controller Trackpad"
+
         /// </summary>
         /// <param name="inputSource">The device you would like to get data from. Any if the action is not device specific.</param>
         string GetLocalizedOrigin(SteamVR_Input_Sources inputSource);

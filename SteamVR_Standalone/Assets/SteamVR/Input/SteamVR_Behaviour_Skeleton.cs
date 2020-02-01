@@ -40,8 +40,8 @@ namespace Valve.VR
 
         /// <summary>
         /// How much of a blend to apply to the transform positions and rotations.
-        /// Set to 0 for the transform orientation to be set by an animation.
-        /// Set to 1 for the transform orientation to be set by the skeleton action.
+
+
         /// </summary>
         [Range(0, 1)]
         [Tooltip("Modify this to blend between animations setup on the hand")]
@@ -258,7 +258,7 @@ namespace Valve.VR
         protected EVRSkeletalMotionRange? temporaryRangeOfMotion = null;
 
         /// <summary>
-        /// Get the accuracy level of the skeletal tracking data.
+
         /// <para/>* Estimated: Body part location can’t be directly determined by the device. Any skeletal pose provided by the device is estimated based on the active buttons, triggers, joysticks, or other input sensors. Examples include the Vive Controller and gamepads.
         /// <para/>* Partial: Body part location can be measured directly but with fewer degrees of freedom than the actual body part.Certain body part positions may be unmeasured by the device and estimated from other input data.Examples include Knuckles or gloves that only measure finger curl
         /// <para/>* Full: Body part location can be measured directly throughout the entire range of motion of the body part.Examples include hi-end mocap systems, or gloves that measure the rotation of each finger segment.
@@ -319,7 +319,7 @@ namespace Valve.VR
 
         protected virtual void Awake()
         {
-            SteamVR_Standalone.Initialize();
+            SteamVR.Initialize();
 
             AssignBonesArray();
 
@@ -413,7 +413,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Sets a temporary range of motion for this action that can easily be reset (using ResetTemporaryRangeOfMotion).
+
         /// This is useful for short range of motion changes, for example picking up a controller shaped object
         /// </summary>
         /// <param name="newRangeOfMotion">The new range of motion you want to apply (temporarily)</param>
@@ -766,7 +766,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Gets the transform for a bone by the joint index. Joint indexes specified in: SteamVR_Skeleton_JointIndexes
+
         /// </summary>
         /// <param name="joint">The joint index of the bone. Specified in SteamVR_Skeleton_JointIndexes</param>
         public virtual Transform GetBone(int joint)
@@ -779,7 +779,7 @@ namespace Valve.VR
 
 
         /// <summary>
-        /// Gets the position of the transform for a bone by the joint index. Joint indexes specified in: SteamVR_Skeleton_JointIndexes
+
         /// </summary>
         /// <param name="joint">The joint index of the bone. Specified in SteamVR_Skeleton_JointIndexes</param>
         /// <param name="local">true to get the localspace position for the joint (position relative to this joint's parent)</param>
@@ -792,7 +792,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Gets the rotation of the transform for a bone by the joint index. Joint indexes specified in: SteamVR_Skeleton_JointIndexes
+
         /// </summary>
         /// <param name="joint">The joint index of the bone. Specified in SteamVR_Skeleton_JointIndexes</param>
         /// <param name="local">true to get the localspace rotation for the joint (rotation relative to this joint's parent)</param>
@@ -941,30 +941,8 @@ namespace Valve.VR
             bool temporarySession = false;
             if (Application.isEditor && Application.isPlaying == false)
             {
-                temporarySession = SteamVR_Standalone.InitializeTemporarySession(true);
+                temporarySession = SteamVR.InitializeTemporarySession(true);
                 Awake();
-
-#if UNITY_EDITOR
-                //gotta wait a bit for steamvr input to startup //todo: implement steamvr_input.isready
-                string title = "SteamVR_Standalone";
-                string text = "Getting reference pose...";
-                float msToWait = 3000;
-                float increment = 100;
-                for (float timer = 0; timer < msToWait; timer += increment)
-                {
-                    bool cancel = UnityEditor.EditorUtility.DisplayCancelableProgressBar(title, text, timer / msToWait);
-                    if (cancel)
-                    {
-                        UnityEditor.EditorUtility.ClearProgressBar();
-
-                        if (temporarySession)
-                            SteamVR_Standalone.ExitTemporarySession();
-                        return;
-                    }
-                    System.Threading.Thread.Sleep((int)increment);
-                }
-                UnityEditor.EditorUtility.ClearProgressBar();
-#endif
 
                 skeletonAction.actionSet.Activate();
 
@@ -1004,7 +982,7 @@ namespace Valve.VR
             }
 
             if (temporarySession)
-                SteamVR_Standalone.ExitTemporarySession();
+                SteamVR.ExitTemporarySession();
         }
 
         protected static bool IsMetacarpal(int boneIndex)

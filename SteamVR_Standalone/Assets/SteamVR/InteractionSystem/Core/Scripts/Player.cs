@@ -61,7 +61,7 @@ namespace Valve.VR.InteractionSystem
 
 
         //-------------------------------------------------
-        // Get the number of active Hands.
+
         //-------------------------------------------------
         public int handCount
         {
@@ -81,7 +81,7 @@ namespace Valve.VR.InteractionSystem
 
 
         //-------------------------------------------------
-        // Get the i-th active Hand.
+
         //
         // i - Zero-based index of the active Hand to get
         //-------------------------------------------------
@@ -157,7 +157,7 @@ namespace Valve.VR.InteractionSystem
         }
 
         //-------------------------------------------------
-        // Get Player scale. Assumes it is scaled equally on all axes.
+
         //-------------------------------------------------
 
         public float scale
@@ -170,7 +170,7 @@ namespace Valve.VR.InteractionSystem
 
 
         //-------------------------------------------------
-        // Get the HMD transform. This might return the fallback camera transform if SteamVR_Standalone is unavailable or disabled.
+
         //-------------------------------------------------
         public Transform hmdTransform
         {
@@ -264,10 +264,10 @@ namespace Valve.VR.InteractionSystem
         {
             _instance = this;
 
-            while (SteamVR_Standalone.initializedState == SteamVR_Standalone.InitializedStates.None || SteamVR_Standalone.initializedState == SteamVR_Standalone.InitializedStates.Initializing)
+            while (SteamVR.initializedState == SteamVR.InitializedStates.None || SteamVR.initializedState == SteamVR.InitializedStates.Initializing)
                 yield return null;
 
-            if (SteamVR_Standalone.instance != null)
+            if (SteamVR.instance != null)
             {
                 ActivateRig(rigSteamVR);
             }
@@ -281,7 +281,7 @@ namespace Valve.VR.InteractionSystem
 
         protected virtual void Update()
         {
-            if (SteamVR_Standalone.initializedState != SteamVR_Standalone.InitializedStates.InitializeSuccess)
+            if (SteamVR.initializedState != SteamVR.InitializedStates.InitializeSuccess)
                 return;
 
             if (headsetOnHead != null)
@@ -368,7 +368,7 @@ namespace Valve.VR.InteractionSystem
             if (!allowToggleTo2D)
                 return;
 
-            if (!SteamVR_Standalone.active)
+            if (!SteamVR.active)
                 return;
 
             int width = 100;

@@ -21,8 +21,8 @@ namespace Valve.VR
             }
         }
 
-        public bool pauseGameWhenDashboardVisible = true;
-        public bool lockPhysicsUpdateRateToRenderFrequency = true;
+        public bool pauseGameWhenDashboardVisible = false;
+        public bool lockPhysicsUpdateRateToRenderFrequency = false;
         public ETrackingUniverseOrigin trackingSpace
         {
             get
@@ -117,41 +117,16 @@ namespace Valve.VR
         {
             if (string.IsNullOrEmpty(_instance.editorAppKey))
             {
-                _instance.editorAppKey = SteamVR_Standalone.GenerateAppKey();
+                _instance.editorAppKey = SteamVR.GenerateAppKey();
                 Debug.Log("<b>[SteamVR_Standalone Setup]</b> Generated you an editor app key of: " + _instance.editorAppKey + ". This lets the editor tell SteamVR_Standalone what project this is. Has no effect on builds. This can be changed in Assets/SteamVR_Standalone/Resources/SteamVR_Settings");
-#if UNITY_EDITOR
-                UnityEditor.EditorUtility.SetDirty(_instance);
-                UnityEditor.AssetDatabase.SaveAssets();
-#endif
+
             }
 
-#if UNITY_EDITOR
-            if (_instance.previewHandLeft == null)
-                _instance.previewHandLeft = FindDefaultPreviewHand(previewLeftDefaultAssetName);
 
-            if (_instance.previewHandRight == null)
-                _instance.previewHandRight = FindDefaultPreviewHand(previewRightDefaultAssetName);
-#endif
         }
 
         private static GameObject FindDefaultPreviewHand(string assetName)
         {
-#if UNITY_EDITOR
-            string[] defaultPaths = UnityEditor.AssetDatabase.FindAssets(string.Format("t:Prefab {0}", assetName));
-            if (defaultPaths != null && defaultPaths.Length > 0)
-            {
-                string defaultGUID = defaultPaths[0];
-                string defaultPath = UnityEditor.AssetDatabase.GUIDToAssetPath(defaultGUID);
-                GameObject defaultAsset = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>(defaultPath);
-
-                if (defaultAsset == null)
-                    Debug.LogError("[SteamVR_Standalone] Could not load default hand preview prefab: " + assetName + ". Found path: " + defaultPath);
-
-                return defaultAsset;
-            }
-            //else //todo: this will generally fail on the first try but will try again before its an issue.
-                //Debug.LogError("[SteamVR_Standalone] Could not load default hand preview prefab: " + assetName);
-#endif
 
             return null;
 

@@ -39,7 +39,7 @@ namespace Valve.VR
             {
                 bool temporarySession = false;
                 if (Application.isEditor && Application.isPlaying == false)
-                    temporarySession = SteamVR_Standalone.InitializeTemporarySession();
+                    temporarySession = SteamVR.InitializeTemporarySession();
 
                 var chaperone = OpenVR.Chaperone;
                 bool success = (chaperone != null) && chaperone.GetPlayAreaRect(ref pRect);
@@ -47,7 +47,7 @@ namespace Valve.VR
                     Debug.LogWarning("<b>[SteamVR_Standalone]</b> Failed to get Calibrated Play Area bounds!  Make sure you have tracking first, and that your space is calibrated.");
 
                 if (temporarySession)
-                    SteamVR_Standalone.ExitTemporarySession();
+                    SteamVR.ExitTemporarySession();
 
                 return success;
             }

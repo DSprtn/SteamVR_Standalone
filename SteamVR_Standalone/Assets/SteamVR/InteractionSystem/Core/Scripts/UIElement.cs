@@ -65,25 +65,4 @@ namespace Valve.VR.InteractionSystem
             onHandClick.Invoke(currentHand);
         }
     }
-
-#if UNITY_EDITOR
-	//-------------------------------------------------------------------------
-	[UnityEditor.CustomEditor( typeof( UIElement ) )]
-	public class UIElementEditor : UnityEditor.Editor
-	{
-		//-------------------------------------------------
-		// Custom Inspector GUI allows us to click from within the UI
-		//-------------------------------------------------
-		public override void OnInspectorGUI()
-		{
-			DrawDefaultInspector();
-
-			UIElement uiElement = (UIElement)target;
-			if ( GUILayout.Button( "Click" ) )
-			{
-				InputModule.instance.Submit( uiElement.gameObject );
-			}
-		}
-	}
-#endif
 }

@@ -177,22 +177,6 @@ namespace Valve.VR
             {
                 setData = SteamVR_Input.GetActionSetDataFromPath(actionSetPath);
 
-                if (setData == null)
-                {
-#if UNITY_EDITOR
-                    if (throwErrors)
-                    {
-                        if (string.IsNullOrEmpty(actionSetPath))
-                        {
-                            Debug.LogError("<b>[SteamVR_Standalone]</b> Action has not been assigned.");
-                        }
-                        else
-                        {
-                            Debug.LogError("<b>[SteamVR_Standalone]</b> Could not find action with path: " + actionSetPath);
-                        }
-                    }
-#endif
-                }
             }
 
             initialized = true;

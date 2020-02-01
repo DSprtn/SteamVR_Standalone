@@ -7,26 +7,46 @@ using UnityEngine;
 
 namespace Assets.SteamVR_Standalone.Standalone
 {
-    class VRShaders : MonoBehaviour
+    public static class VRShaders
     {
-
-        public static Shader blit;
-        public static Shader blitFlip;
-        public static Shader overlay;
-        public static Shader occlusion;
-
-        void Awake()
+        public enum VRShader
         {
-            if(Shader.Find("Custom/SteamVR_Blit") == null)
-            {
-                Debug.Log("Shader not present in build...");
-                TryLoadShaders();
-            }
+            blit,
+            blitFlip,
+            overlay,
+            occlusion
         }
 
-        public void TryLoadShaders()
+        static Shader blit;
+        static Shader blitFlip;
+        static Shader overlay;
+        static Shader occlusion;
+
+        public static Shader GetShader(VRShader shader)
         {
-            Debug.Log("Loading shaders...");
+            if(blit == null)
+            {
+                TryLoadShaders();
+            }
+
+            switch(shader)
+            {
+                case (VRShader.blit):
+                    return blit;
+                case (VRShader.blitFlip):
+                    return blitFlip;
+                case (VRShader.overlay):
+                    return overlay;
+                case (VRShader.occlusion):
+                    return occlusion;
+            }
+            Debug.LogWarning("No valid shader found");
+            return null;
+        }
+
+        public static void TryLoadShaders()
+        {
+            Debug.Log("Loading shaders from asset bundle...");
             AssetBundle assetBundle = AssetBundle.LoadFromFile(Application.streamingAssetsPath + "/vrshaders");
             if(assetBundle == null)
             {

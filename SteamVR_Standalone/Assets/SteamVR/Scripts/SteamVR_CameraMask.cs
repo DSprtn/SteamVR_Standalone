@@ -6,11 +6,11 @@ using UnityEngine.Rendering;
 
 namespace Valve.VR
 {
-    // Token: 0x020002E9 RID: 745
+
     [ExecuteInEditMode]
     public class SteamVR_CameraMask : MonoBehaviour
     {
-        // Token: 0x06000E0A RID: 3594 RVA: 0x00019944 File Offset: 0x00017B44
+
         private void Awake()
         {
             this.meshFilter = base.GetComponent<MeshFilter>();
@@ -20,7 +20,7 @@ namespace Valve.VR
             }
             if (SteamVR_CameraMask.material == null)
             {
-                SteamVR_CameraMask.material = new Material(VRShaders.occlusion);
+                SteamVR_CameraMask.material = new Material(VRShaders.GetShader(VRShaders.VRShader.occlusion));
             }
             MeshRenderer meshRenderer = base.GetComponent<MeshRenderer>();
             if (meshRenderer == null)
@@ -35,8 +35,8 @@ namespace Valve.VR
             meshRenderer.reflectionProbeUsage = ReflectionProbeUsage.Off;
         }
 
-        // Token: 0x06000E0C RID: 3596 RVA: 0x000199E4 File Offset: 0x00017BE4
-        public void Set(SteamVR_Standalone vr, EVREye eye)
+
+        public void Set(SteamVR vr, EVREye eye)
         {
             if (SteamVR_CameraMask.hiddenAreaMeshes[(int)eye] == null)
             {
@@ -45,13 +45,13 @@ namespace Valve.VR
             this.meshFilter.mesh = SteamVR_CameraMask.hiddenAreaMeshes[(int)eye];
         }
 
-        // Token: 0x06000E0D RID: 3597 RVA: 0x00008E65 File Offset: 0x00007065
+
         public void Clear()
         {
             this.meshFilter.mesh = null;
         }
 
-        // Token: 0x06000E0F RID: 3599 RVA: 0x00019A38 File Offset: 0x00017C38
+
         public static Mesh CreateHiddenAreaMesh(HiddenAreaMesh_t src, VRTextureBounds_t bounds)
         {
             if (src.unTriangleCount == 0u)
@@ -123,13 +123,13 @@ namespace Valve.VR
             };
         }
 
-        // Token: 0x04000DB4 RID: 3508
+
         private static Material material;
 
-        // Token: 0x04000DB5 RID: 3509
+
         private static Mesh[] hiddenAreaMeshes = new Mesh[2];
 
-        // Token: 0x04000DB6 RID: 3510
+
         private MeshFilter meshFilter;
     }
 }

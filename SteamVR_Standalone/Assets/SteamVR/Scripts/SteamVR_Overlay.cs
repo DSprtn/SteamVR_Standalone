@@ -84,7 +84,7 @@ namespace Valve.VR
 
                 var tex = new Texture_t();
                 tex.handle = texture.GetNativeTexturePtr();
-                tex.eType = SteamVR_Standalone.instance.textureType;
+                tex.eType = SteamVR.instance.textureType;
                 tex.eColorSpace = EColorSpace.Auto;
                 overlay.SetOverlayTexture(handle, ref tex);
 
@@ -114,7 +114,7 @@ namespace Valve.VR
                     offset.pos.z += distance;
 
                     var t = offset.ToHmdMatrix34();
-                    overlay.SetOverlayTransformAbsolute(handle, SteamVR_Standalone.settings.trackingSpace, ref t);
+                    overlay.SetOverlayTransformAbsolute(handle, SteamVR.settings.trackingSpace, ref t);
                 }
 
                 overlay.SetOverlayInputMethod(handle, inputMethod);
@@ -150,7 +150,7 @@ namespace Valve.VR
                 return false;
 
             var input = new VROverlayIntersectionParams_t();
-            input.eOrigin = SteamVR_Standalone.settings.trackingSpace;
+            input.eOrigin = SteamVR.settings.trackingSpace;
             input.vSource.v0 = source.x;
             input.vSource.v1 = source.y;
             input.vSource.v2 = -source.z;

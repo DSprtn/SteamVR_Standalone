@@ -162,39 +162,5 @@ namespace Valve.VR.InteractionSystem
     }
 
 
-#if UNITY_EDITOR
-	//-------------------------------------------------------------------------
-	[CustomEditor( typeof( TeleportArea ) )]
-	public class TeleportAreaEditor : Editor
-	{
-		//-------------------------------------------------
-		void OnEnable()
-		{
-			if ( Selection.activeTransform != null )
-			{
-				TeleportArea teleportArea = Selection.activeTransform.GetComponent<TeleportArea>();
-				if ( teleportArea != null )
-				{
-					teleportArea.UpdateVisualsInEditor();
-				}
-			}
-		}
 
-
-		//-------------------------------------------------
-		public override void OnInspectorGUI()
-		{
-			DrawDefaultInspector();
-
-			if ( Selection.activeTransform != null )
-			{
-				TeleportArea teleportArea = Selection.activeTransform.GetComponent<TeleportArea>();
-				if ( GUI.changed && teleportArea != null )
-				{
-					teleportArea.UpdateVisualsInEditor();
-				}
-			}
-		}
-	}
-#endif
 }

@@ -77,7 +77,7 @@ namespace Valve.VR
 
 
         /// <summary>
-        /// Set the blending value of a blendingBehaviour. Works best on Manual type behaviours.
+
         /// </summary>
         public void SetBlendingBehaviourValue(string behaviourName, float value)
         {
@@ -93,7 +93,7 @@ namespace Valve.VR
             }
         }
         /// <summary>
-        /// Get the blending value of a blendingBehaviour.
+
         /// </summary>
         public float GetBlendingBehaviourValue(string behaviourName)
         {
@@ -132,7 +132,7 @@ namespace Valve.VR
             return false;
         }
         /// <summary>
-        /// Get a blending behaviour by name.
+
         /// </summary>
         public PoseBlendingBehaviour GetBlendingBehaviour(string behaviourName)
         {
@@ -280,7 +280,7 @@ namespace Valve.VR
             public SteamVR_Skeleton_PoseSnapshot snapshotL;
 
             /// <summary>
-            /// Get the snapshot of this pose with effects such as additive finger animation applied.
+
             /// </summary>
             public SteamVR_Skeleton_PoseSnapshot GetHandSnapshot(SteamVR_Input_Sources inputSource)
             {

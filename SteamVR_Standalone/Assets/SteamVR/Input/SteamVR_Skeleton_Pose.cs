@@ -50,7 +50,7 @@ namespace Valve.VR
         public SteamVR_Skeleton_FingerExtensionTypes pinkyFingerMovementType = SteamVR_Skeleton_FingerExtensionTypes.Static;
 
         /// <summary>
-        /// Get extension type for a particular finger. Thumb is 0, Index is 1, etc.
+
         /// </summary>
         public SteamVR_Skeleton_FingerExtensionTypes GetFingerExtensionType(int finger)
         {

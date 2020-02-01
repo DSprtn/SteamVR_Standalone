@@ -489,13 +489,7 @@ namespace Valve.VR.InteractionSystem
         //-------------------------------------------------
         public static void Quit()
         {
-#if UNITY_EDITOR
-			UnityEditor.EditorApplication.isPlaying = false;
-#else
-            // NOTE: The recommended call for exiting a Unity app is UnityEngine.Application.Quit(), but as
-            // of 5.1.0f3 this was causing the application to crash. The following works without crashing:
             System.Diagnostics.Process.GetCurrentProcess().Kill();
-#endif
         }
 
         //-------------------------------------------------

@@ -158,7 +158,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Sets all pose and skeleton actions to use the specified universe origin.
+
         /// </summary>
         public static void SetTrackingUniverseOrigin(ETrackingUniverseOrigin newOrigin)
         {
@@ -176,7 +176,7 @@ namespace Valve.VR
         where SourceElement : SteamVR_Action_Pose_Source, new()
     {
         /// <summary>
-        /// Sets all pose (and skeleton) actions to use the specified universe origin.
+
         /// </summary>
         protected static void SetUniverseOrigin(ETrackingUniverseOrigin newOrigin)
         {
@@ -385,7 +385,7 @@ namespace Valve.VR
         where Source : SteamVR_Action_Pose_Source, new()
     {
         /// <summary>
-        /// Sets all pose (and skeleton) actions to use the specified universe origin without going through the sourcemap indexer
+
         /// </summary>
         public void SetTrackingUniverseOrigin(ETrackingUniverseOrigin newOrigin)
         {
@@ -572,7 +572,7 @@ namespace Valve.VR
             if (framesAhead == 0)
                 err = OpenVR.Input.GetPoseActionDataForNextFrame(handle, universeOrigin, ref poseActionData, poseActionData_size, inputSourceHandle);
             else
-                err = OpenVR.Input.GetPoseActionDataRelativeToNow(handle, universeOrigin, framesAhead * (Time.timeScale / SteamVR_Standalone.instance.hmd_DisplayFrequency), ref poseActionData, poseActionData_size, inputSourceHandle);
+                err = OpenVR.Input.GetPoseActionDataRelativeToNow(handle, universeOrigin, framesAhead * (Time.timeScale / SteamVR.instance.hmd_DisplayFrequency), ref poseActionData, poseActionData_size, inputSourceHandle);
 
             if (err != EVRInputError.None)
             {

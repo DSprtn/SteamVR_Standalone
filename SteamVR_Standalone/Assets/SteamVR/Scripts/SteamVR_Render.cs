@@ -8,16 +8,16 @@ using UnityEngine.Events;
 
 namespace Valve.VR
 {
-    // Token: 0x02000306 RID: 774
+
     public class SteamVR_Render : MonoBehaviour
     {
-        // Token: 0x170001E5 RID: 485
-        // (get) Token: 0x06000E9E RID: 3742 RVA: 0x000094EF File Offset: 0x000076EF
-        // (set) Token: 0x06000E9F RID: 3743 RVA: 0x000094F6 File Offset: 0x000076F6
+
+
+
         public static EVREye eye { get; private set; }
 
-        // Token: 0x170001E6 RID: 486
-        // (get) Token: 0x06000EA0 RID: 3744 RVA: 0x000094FE File Offset: 0x000076FE
+
+
         public static SteamVR_Render instance
         {
             get
@@ -26,14 +26,14 @@ namespace Valve.VR
             }
         }
 
-        // Token: 0x06000EA1 RID: 3745 RVA: 0x0000950A File Offset: 0x0000770A
+
         private void OnApplicationQuit()
         {
             SteamVR_Render.isQuitting = true;
-            SteamVR_Standalone.SafeDispose();
+            SteamVR.SafeDispose();
         }
 
-        // Token: 0x06000EA2 RID: 3746 RVA: 0x00009517 File Offset: 0x00007717
+
         public static void Add(SteamVR_Camera vrcam)
         {
             if (!SteamVR_Render.isQuitting)
@@ -42,7 +42,7 @@ namespace Valve.VR
             }
         }
 
-        // Token: 0x06000EA3 RID: 3747 RVA: 0x0000952B File Offset: 0x0000772B
+
         public static void Remove(SteamVR_Camera vrcam)
         {
             if (!SteamVR_Render.isQuitting && SteamVR_Render.instance != null)
@@ -51,7 +51,7 @@ namespace Valve.VR
             }
         }
 
-        // Token: 0x06000EA4 RID: 3748 RVA: 0x0000954C File Offset: 0x0000774C
+
         public static SteamVR_Camera Top()
         {
             if (!SteamVR_Render.isQuitting)
@@ -61,7 +61,7 @@ namespace Valve.VR
             return null;
         }
 
-        // Token: 0x06000EA5 RID: 3749 RVA: 0x0001D8A0 File Offset: 0x0001BAA0
+
         private void AddInternal(SteamVR_Camera vrcam)
         {
             Camera component = vrcam.GetComponent<Camera>();
@@ -85,7 +85,7 @@ namespace Valve.VR
             base.enabled = true;
         }
 
-        // Token: 0x06000EA6 RID: 3750 RVA: 0x0001D92C File Offset: 0x0001BB2C
+
         private void RemoveInternal(SteamVR_Camera vrcam)
         {
             int num = this.cameras.Length;
@@ -114,7 +114,7 @@ namespace Valve.VR
             this.cameras = array;
         }
 
-        // Token: 0x06000EA7 RID: 3751 RVA: 0x00009561 File Offset: 0x00007761
+
         private SteamVR_Camera TopInternal()
         {
             if (this.cameras.Length != 0)
@@ -124,9 +124,9 @@ namespace Valve.VR
             return null;
         }
 
-        // Token: 0x170001E7 RID: 487
-        // (get) Token: 0x06000EA8 RID: 3752 RVA: 0x0000957F File Offset: 0x0000777F
-        // (set) Token: 0x06000EA9 RID: 3753 RVA: 0x0001D9B0 File Offset: 0x0001BBB0
+
+
+
         public static bool pauseRendering
         {
             get
@@ -144,7 +144,7 @@ namespace Valve.VR
             }
         }
 
-        // Token: 0x06000EAA RID: 3754 RVA: 0x00009586 File Offset: 0x00007786
+
         private IEnumerator RenderLoop()
         {
             while (Application.isPlaying)
@@ -159,11 +159,11 @@ namespace Valve.VR
                         {
                             continue;
                         }
-                        compositor.SetTrackingSpace(SteamVR_Standalone.settings.trackingSpace);
+                        compositor.SetTrackingSpace(SteamVR.settings.trackingSpace);
                         SteamVR_Utils.QueueEventOnRenderThread(201510020);
-                        SteamVR_Standalone.Unity.EventWriteString("[UnityMain] GetNativeTexturePtr - Begin");
+                        SteamVR.Unity.EventWriteString("[UnityMain] GetNativeTexturePtr - Begin");
                         SteamVR_Camera.GetSceneTexture(this.cameras[0].GetComponent<Camera>()).GetNativeTexturePtr();
-                        SteamVR_Standalone.Unity.EventWriteString("[UnityMain] GetNativeTexturePtr - End");
+                        SteamVR.Unity.EventWriteString("[UnityMain] GetNativeTexturePtr - End");
                         compositor.GetLastPoses(this.poses, this.gamePoses);
                         SteamVR_Events.NewPoses.Send(this.poses);
                         SteamVR_Events.NewPosesApplied.Send();
@@ -177,7 +177,7 @@ namespace Valve.VR
                     {
                         this.RenderExternalCamera();
                     }
-                    SteamVR_Standalone instance2 = SteamVR_Standalone.instance;
+                    SteamVR instance2 = SteamVR.instance;
                     this.RenderEye(instance2, EVREye.Eye_Left);
                     this.RenderEye(instance2, EVREye.Eye_Right);
                     foreach (SteamVR_Camera steamVR_Camera in this.cameras)
@@ -194,7 +194,7 @@ namespace Valve.VR
             yield break;
         }
 
-        // Token: 0x06000EAB RID: 3755 RVA: 0x0001D9D4 File Offset: 0x0001BBD4
+
         private bool CheckExternalCamera()
         {
             bool? flag = this.doesPathExist;
@@ -260,7 +260,7 @@ namespace Valve.VR
             return this.externalCamera != null;
         }
 
-        // Token: 0x06000EAC RID: 3756 RVA: 0x0001DBF4 File Offset: 0x0001BDF4
+
         private void RenderExternalCamera()
         {
             if (this.externalCamera == null)
@@ -281,23 +281,23 @@ namespace Valve.VR
             this.externalCamera.RenderFar();
         }
 
-        // Token: 0x06000EAD RID: 3757 RVA: 0x0001DC74 File Offset: 0x0001BE74
+
         private void OnInputFocus(bool hasFocus)
         {
-            if (!SteamVR_Standalone.active)
+            if (!SteamVR.active)
             {
                 return;
             }
             if (hasFocus)
             {
-                if (SteamVR_Standalone.settings.pauseGameWhenDashboardVisible)
+                if (SteamVR.settings.pauseGameWhenDashboardVisible)
                 {
                     Time.timeScale = this.timeScale;
                 }
                 SteamVR_Camera.sceneResolutionScale = this.sceneResolutionScale;
                 return;
             }
-            if (SteamVR_Standalone.settings.pauseGameWhenDashboardVisible)
+            if (SteamVR.settings.pauseGameWhenDashboardVisible)
             {
                 this.timeScale = Time.timeScale;
                 Time.timeScale = 0f;
@@ -306,7 +306,7 @@ namespace Valve.VR
             SteamVR_Camera.sceneResolutionScale = 0.5f;
         }
 
-        // Token: 0x06000EAE RID: 3758 RVA: 0x0001DCE8 File Offset: 0x0001BEE8
+
         private string GetScreenshotFilename(uint screenshotHandle, EVRScreenshotPropertyFilenames screenshotPropertyFilename)
         {
             EVRScreenshotError evrscreenshotError = EVRScreenshotError.None;
@@ -328,7 +328,7 @@ namespace Valve.VR
             return stringBuilder.ToString();
         }
 
-        // Token: 0x06000EAF RID: 3759 RVA: 0x0001DD3C File Offset: 0x0001BF3C
+
         private void OnRequestScreenshot(VREvent_t vrEvent)
         {
             uint handle = vrEvent.data.screenshot.handle;
@@ -354,7 +354,7 @@ namespace Valve.VR
             }
         }
 
-        // Token: 0x06000EB0 RID: 3760 RVA: 0x0001DE04 File Offset: 0x0001C004
+
         private void OnEnable()
         {
             base.StartCoroutine(this.RenderLoop());
@@ -366,7 +366,7 @@ namespace Valve.VR
             }
             Application.onBeforeRender += this.OnBeforeRender;
             Camera.onPreCull = (Camera.CameraCallback)Delegate.Combine(Camera.onPreCull, new Camera.CameraCallback(this.OnCameraPreCull));
-            if (SteamVR_Standalone.initializedState == SteamVR_Standalone.InitializedStates.InitializeSuccess)
+            if (SteamVR.initializedState == SteamVR.InitializedStates.InitializeSuccess)
             {
                 OpenVR.Screenshots.HookScreenshot(this.screenshotTypes);
                 return;
@@ -374,7 +374,7 @@ namespace Valve.VR
             SteamVR_Events.Initialized.AddListener(new UnityAction<bool>(this.OnSteamVRInitialized));
         }
 
-        // Token: 0x06000EB1 RID: 3761 RVA: 0x00009595 File Offset: 0x00007795
+
         private void OnSteamVRInitialized(bool success)
         {
             if (success)
@@ -383,7 +383,7 @@ namespace Valve.VR
             }
         }
 
-        // Token: 0x06000EB2 RID: 3762 RVA: 0x0001DEC4 File Offset: 0x0001C0C4
+
         private void OnDisable()
         {
             base.StopAllCoroutines();
@@ -391,13 +391,13 @@ namespace Valve.VR
             SteamVR_Events.System(EVREventType.VREvent_RequestScreenshot).Remove(new UnityAction<VREvent_t>(this.OnRequestScreenshot));
             Application.onBeforeRender -= this.OnBeforeRender;
             Camera.onPreCull = (Camera.CameraCallback)Delegate.Remove(Camera.onPreCull, new Camera.CameraCallback(this.OnCameraPreCull));
-            if (SteamVR_Standalone.initializedState != SteamVR_Standalone.InitializedStates.InitializeSuccess)
+            if (SteamVR.initializedState != SteamVR.InitializedStates.InitializeSuccess)
             {
                 SteamVR_Events.Initialized.RemoveListener(new UnityAction<bool>(this.OnSteamVRInitialized));
             }
         }
 
-        // Token: 0x06000EB3 RID: 3763 RVA: 0x0001DF58 File Offset: 0x0001C158
+
         public void UpdatePoses()
         {
             CVRCompositor compositor = OpenVR.Compositor;
@@ -409,23 +409,23 @@ namespace Valve.VR
             }
         }
 
-        // Token: 0x06000EB4 RID: 3764 RVA: 0x000095AB File Offset: 0x000077AB
+
         private void OnBeforeRender()
         {
-            if (!SteamVR_Standalone.active)
+            if (!SteamVR.active)
             {
                 return;
             }
-            if (SteamVR_Standalone.settings.IsPoseUpdateMode(SteamVR_UpdateModes.OnPreCull))
+            if (SteamVR.settings.IsPoseUpdateMode(SteamVR_UpdateModes.OnPreCull))
             {
                 this.UpdatePoses();
             }
         }
 
-        // Token: 0x06000EB5 RID: 3765 RVA: 0x0001DF9C File Offset: 0x0001C19C
+
         private void Update()
         {
-            if (!SteamVR_Standalone.active)
+            if (!SteamVR.active)
             {
                 return;
             }
@@ -481,9 +481,9 @@ namespace Valve.VR
             Application.runInBackground = true;
             QualitySettings.maxQueuedFrames = -1;
             QualitySettings.vSyncCount = 0;
-            if (SteamVR_Standalone.settings.lockPhysicsUpdateRateToRenderFrequency && Time.timeScale > 0f)
+            if (SteamVR.settings.lockPhysicsUpdateRateToRenderFrequency && Time.timeScale > 0f)
             {
-                SteamVR_Standalone instance = SteamVR_Standalone.instance;
+                SteamVR instance = SteamVR.instance;
                 if (instance != null)
                 {
                     Time.fixedDeltaTime = Time.timeScale / instance.hmd_DisplayFrequency;
@@ -491,10 +491,10 @@ namespace Valve.VR
             }
         }
 
-        // Token: 0x06000EB7 RID: 3767 RVA: 0x0001E15C File Offset: 0x0001C35C
+
         private void OnCameraPreCull(Camera cam)
         {
-            if (!SteamVR_Standalone.active)
+            if (!SteamVR.active)
             {
                 return;
             }
@@ -509,15 +509,15 @@ namespace Valve.VR
             if (Time.frameCount != SteamVR_Render.lastFrameCount)
             {
                 SteamVR_Render.lastFrameCount = Time.frameCount;
-                if (SteamVR_Standalone.settings.IsPoseUpdateMode(SteamVR_UpdateModes.OnPreCull))
+                if (SteamVR.settings.IsPoseUpdateMode(SteamVR_UpdateModes.OnPreCull))
                 {
                     this.UpdatePoses();
                 }
             }
         }
 
-        // Token: 0x06000EB9 RID: 3769 RVA: 0x0001E1B0 File Offset: 0x0001C3B0
-        private void RenderEye(SteamVR_Standalone vr, EVREye eye)
+
+        private void RenderEye(SteamVR vr, EVREye eye)
         {
             SteamVR_Render.eye = eye;
             if (this.cameraMask != null)
@@ -547,13 +547,13 @@ namespace Valve.VR
             }
         }
 
-        // Token: 0x06000EBA RID: 3770 RVA: 0x000095D0 File Offset: 0x000077D0
+
         private void FixedUpdate()
         {
             SteamVR_Utils.QueueEventOnRenderThread(201510024);
         }
 
-        // Token: 0x06000EBB RID: 3771 RVA: 0x0001E2E0 File Offset: 0x0001C4E0
+
         private void Awake()
         {
             this.cameraMask = new GameObject("cameraMask")
@@ -573,55 +573,55 @@ namespace Valve.VR
             }
         }
 
-        // Token: 0x04000E66 RID: 3686
+
         public SteamVR_ExternalCamera externalCamera;
 
-        // Token: 0x04000E67 RID: 3687
+
         public string externalCameraConfigPath = "externalcamera.cfg";
 
-        // Token: 0x04000E69 RID: 3689
+
         private static bool isQuitting;
 
-        // Token: 0x04000E6A RID: 3690
+
         private SteamVR_Camera[] cameras = new SteamVR_Camera[0];
 
-        // Token: 0x04000E6B RID: 3691
+
         public TrackedDevicePose_t[] poses = new TrackedDevicePose_t[64];
 
-        // Token: 0x04000E6C RID: 3692
+
         public TrackedDevicePose_t[] gamePoses = new TrackedDevicePose_t[0];
 
-        // Token: 0x04000E6D RID: 3693
+
         private static bool _pauseRendering;
 
-        // Token: 0x04000E6E RID: 3694
+
         private WaitForEndOfFrame waitForEndOfFrame = new WaitForEndOfFrame();
 
-        // Token: 0x04000E6F RID: 3695
+
         private bool? doesPathExist;
 
-        // Token: 0x04000E70 RID: 3696
+
         private float sceneResolutionScale = 1f;
 
-        // Token: 0x04000E71 RID: 3697
+
         private float timeScale = 1f;
 
-        // Token: 0x04000E72 RID: 3698
+
         private EVRScreenshotType[] screenshotTypes = new EVRScreenshotType[]
         {
             EVRScreenshotType.StereoPanorama
         };
 
-        // Token: 0x04000E73 RID: 3699
+
         private static int lastFrameCount = -1;
 
-        // Token: 0x04000E74 RID: 3700
+
         public LayerMask leftMask;
 
-        // Token: 0x04000E75 RID: 3701
+
         public LayerMask rightMask;
 
-        // Token: 0x04000E76 RID: 3702
+
         private SteamVR_CameraMask cameraMask;
     }
 }

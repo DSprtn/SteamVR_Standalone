@@ -17,9 +17,9 @@ namespace Valve.VR.Extras
         {
             yield return new WaitForSeconds(1f); // just here to show that you can wait a while.
 
-            SteamVR_Standalone.Initialize(true);
+            SteamVR.Initialize(true);
 
-            while (SteamVR_Standalone.initializedState != SteamVR_Standalone.InitializedStates.InitializeSuccess)
+            while (SteamVR.initializedState != SteamVR.InitializedStates.InitializeSuccess)
                 yield return null;
 
             for (int disableIndex = 0; disableIndex < disableObjectsOnLoad.Length; disableIndex++)
