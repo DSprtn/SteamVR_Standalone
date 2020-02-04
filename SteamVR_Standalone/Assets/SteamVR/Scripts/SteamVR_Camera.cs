@@ -55,17 +55,7 @@ namespace Valve.VR
             return new Ray(this._head.position, this._head.forward);
         }
 
-        public static float sceneResolutionScale
-        {
-            get
-            {
-                return 1f;
-            }
-            set
-            {
-                SteamVR_Camera.sceneResolutionScale = value;
-            }
-        }
+        public static float sceneResolutionScale = 1f;
 
         private void OnDisable()
         {
