@@ -206,12 +206,14 @@ namespace Valve.VR
                     {
                         typeof(SteamVR_GameView)
                     }).transform;
+
+                    
+                    this.head.position = base.transform.position;
+                    this.head.rotation = base.transform.rotation;
+                    this.head.localScale = Vector3.one;
+                    this.head.tag = base.tag;
                 }
                 this.head.parent = transform;
-                this.head.position = base.transform.position;
-                this.head.rotation = base.transform.rotation;
-                this.head.localScale = Vector3.one;
-                this.head.tag = base.tag;
                 Camera component = this.head.GetComponent<Camera>();
                 component.clearFlags = CameraClearFlags.Nothing;
                 component.cullingMask = 0;
@@ -222,12 +224,12 @@ namespace Valve.VR
                 component.farClipPlane = 1f;
                 component.useOcclusionCulling = false;
             }
-            if (base.transform.parent != this.head)
+            if (transform.parent != this.head)
             {
-                base.transform.parent = this.head;
-                base.transform.localPosition = Vector3.zero;
-                base.transform.localRotation = Quaternion.identity;
-                base.transform.localScale = Vector3.one;
+                transform.parent = this.head;
+                transform.localPosition = Vector3.zero;
+                transform.localRotation = Quaternion.identity;
+                transform.localScale = Vector3.one;
                 while (base.transform.childCount > 0)
                 {
                     base.transform.GetChild(0).parent = this.head;
