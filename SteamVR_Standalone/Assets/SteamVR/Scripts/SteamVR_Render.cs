@@ -155,7 +155,7 @@ namespace Valve.VR
                     CVRCompositor compositor = OpenVR.Compositor;
                     if (compositor != null)
                     {
-                        if (!compositor.CanRenderScene())
+                        if (!compositor.CanRenderScene() || cameras.Length < 1)
                         {
                             continue;
                         }
