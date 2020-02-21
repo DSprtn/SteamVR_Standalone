@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+
 namespace Valve.VR
 {
     public class SteamVR_Input_ActionSet_default : SteamVR_ActionSet
@@ -144,6 +145,22 @@ namespace Valve.VR
             get
             {
                 return SteamVR_Actions.default_Reload;
+            }
+        }
+
+        public virtual SteamVR_Action_Boolean OpenMap
+        {
+            get
+            {
+                return SteamVR_Actions.default_OpenMap;
+            }
+        }
+
+        public virtual SteamVR_Action_Boolean OpenMenu
+        {
+            get
+            {
+                return SteamVR_Actions.default_OpenMenu;
             }
         }
 
