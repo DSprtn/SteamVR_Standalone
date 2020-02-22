@@ -583,7 +583,7 @@ namespace Valve.VR
         private static bool isQuitting;
 
 
-        private SteamVR_Camera[] cameras = new SteamVR_Camera[0];
+        public SteamVR_Camera[] cameras = new SteamVR_Camera[0];
 
 
         public TrackedDevicePose_t[] poses = new TrackedDevicePose_t[64];
