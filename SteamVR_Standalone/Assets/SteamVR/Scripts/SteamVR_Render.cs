@@ -16,6 +16,8 @@ namespace Valve.VR
 
         public static EVREye eye { get; private set; }
 
+        public static float unfocusedRenderResolution = .5f;
+
 
 
         public static SteamVR_Render instance
@@ -303,7 +305,7 @@ namespace Valve.VR
                 Time.timeScale = 0f;
             }
             this.sceneResolutionScale = SteamVR_Camera.sceneResolutionScale;
-            SteamVR_Camera.sceneResolutionScale = 0.5f;
+            SteamVR_Camera.sceneResolutionScale = unfocusedRenderResolution;
         }
 
 
