@@ -14,6 +14,8 @@ namespace Standalone
     public class SteamVR_GameView : MonoBehaviour
     {
 
+        static Camera cam;
+
         private void OnEnable()
         {
             if (SteamVR_GameView.overlayMaterial == null)
@@ -43,8 +45,11 @@ namespace Standalone
         private void OnPostRender()
         {
             SteamVR instance = SteamVR.instance;
-            Camera component = base.GetComponent<Camera>();
-            float num = this.scale * component.aspect / instance.aspect;
+            if(!cam)
+            {
+                cam = GetComponent<Camera>();
+            }
+            float num = this.scale * cam.aspect / instance.aspect;
             float x = -this.scale;
             float x2 = this.scale;
             float y = num;

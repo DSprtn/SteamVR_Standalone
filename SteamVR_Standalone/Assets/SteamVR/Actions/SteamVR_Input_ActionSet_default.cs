@@ -68,11 +68,11 @@ namespace Valve.VR
             }
         }
 
-        public virtual SteamVR_Action_Boolean Aim
+        public virtual SteamVR_Action_Boolean ToggleWatchMode
         {
             get
             {
-                return SteamVR_Actions.default_Aim;
+                return SteamVR_Actions.default_ToggleWatchMode;
             }
         }
 
@@ -161,6 +161,14 @@ namespace Valve.VR
             get
             {
                 return SteamVR_Actions.default_OpenMenu;
+            }
+        }
+
+        public virtual SteamVR_Action_Boolean Ping
+        {
+            get
+            {
+                return SteamVR_Actions.default_Ping;
             }
         }
 

@@ -68,11 +68,11 @@ namespace Valve.VR
             }
         }
 
-        public static SteamVR_Action_Boolean default_Aim
+        public static SteamVR_Action_Boolean default_ToggleWatchMode
         {
             get
             {
-                return SteamVR_Actions.p_default_Aim.GetCopy<SteamVR_Action_Boolean>();
+                return SteamVR_Actions.p_default_ToggleWatchMode.GetCopy<SteamVR_Action_Boolean>();
             }
         }
 
@@ -164,6 +164,14 @@ namespace Valve.VR
             }
         }
 
+        public static SteamVR_Action_Boolean default_Ping
+        {
+            get
+            {
+                return SteamVR_Actions.p_default_Ping.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+
         public static SteamVR_Action_Vibration default_Haptic
         {
             get
@@ -184,7 +192,7 @@ namespace Valve.VR
                 SteamVR_Actions.default_SnapTurnLeft,
                 SteamVR_Actions.default_SnapTurnRight,
                 SteamVR_Actions.default_Movement,
-                SteamVR_Actions.default_Aim,
+                SteamVR_Actions.default_ToggleWatchMode,
                 SteamVR_Actions.default_Shoot,
                 SteamVR_Actions.default_Interact,
                 SteamVR_Actions.default_Jump,
@@ -196,6 +204,7 @@ namespace Valve.VR
                 SteamVR_Actions.default_Reload,
                 SteamVR_Actions.default_OpenMap,
                 SteamVR_Actions.default_OpenMenu,
+                SteamVR_Actions.default_Ping,
                 SteamVR_Actions.default_Haptic
             };
             SteamVR_Input.actionsIn = new ISteamVR_Action_In[]
@@ -208,7 +217,7 @@ namespace Valve.VR
                 SteamVR_Actions.default_SnapTurnLeft,
                 SteamVR_Actions.default_SnapTurnRight,
                 SteamVR_Actions.default_Movement,
-                SteamVR_Actions.default_Aim,
+                SteamVR_Actions.default_ToggleWatchMode,
                 SteamVR_Actions.default_Shoot,
                 SteamVR_Actions.default_Interact,
                 SteamVR_Actions.default_Jump,
@@ -219,7 +228,8 @@ namespace Valve.VR
                 SteamVR_Actions.default_Sprint,
                 SteamVR_Actions.default_Reload,
                 SteamVR_Actions.default_OpenMap,
-                SteamVR_Actions.default_OpenMenu
+                SteamVR_Actions.default_OpenMenu,
+                SteamVR_Actions.default_Ping
             };
             SteamVR_Input.actionsOut = new ISteamVR_Action_Out[]
             {
@@ -238,7 +248,7 @@ namespace Valve.VR
                 SteamVR_Actions.default_HeadsetOnHead,
                 SteamVR_Actions.default_SnapTurnLeft,
                 SteamVR_Actions.default_SnapTurnRight,
-                SteamVR_Actions.default_Aim,
+                SteamVR_Actions.default_ToggleWatchMode,
                 SteamVR_Actions.default_Shoot,
                 SteamVR_Actions.default_Interact,
                 SteamVR_Actions.default_Jump,
@@ -249,7 +259,8 @@ namespace Valve.VR
                 SteamVR_Actions.default_Sprint,
                 SteamVR_Actions.default_Reload,
                 SteamVR_Actions.default_OpenMap,
-                SteamVR_Actions.default_OpenMenu
+                SteamVR_Actions.default_OpenMenu,
+                SteamVR_Actions.default_Ping
             };
             SteamVR_Input.actionsSingle = new SteamVR_Action_Single[]
             {
@@ -272,7 +283,7 @@ namespace Valve.VR
                 SteamVR_Actions.default_SnapTurnLeft,
                 SteamVR_Actions.default_SnapTurnRight,
                 SteamVR_Actions.default_Movement,
-                SteamVR_Actions.default_Aim,
+                SteamVR_Actions.default_ToggleWatchMode,
                 SteamVR_Actions.default_Shoot,
                 SteamVR_Actions.default_Interact,
                 SteamVR_Actions.default_Jump,
@@ -283,7 +294,8 @@ namespace Valve.VR
                 SteamVR_Actions.default_Sprint,
                 SteamVR_Actions.default_Reload,
                 SteamVR_Actions.default_OpenMap,
-                SteamVR_Actions.default_OpenMenu
+                SteamVR_Actions.default_OpenMenu,
+                SteamVR_Actions.default_Ping
             };
         }
 
@@ -297,7 +309,7 @@ namespace Valve.VR
             SteamVR_Actions.p_default_SnapTurnLeft = SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/SnapTurnLeft");
             SteamVR_Actions.p_default_SnapTurnRight = SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/SnapTurnRight");
             SteamVR_Actions.p_default_Movement = SteamVR_Action.Create<SteamVR_Action_Vector2>("/actions/default/in/Movement");
-            SteamVR_Actions.p_default_Aim = SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/Aim");
+            SteamVR_Actions.p_default_ToggleWatchMode = SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/ToggleWatchMode");
             SteamVR_Actions.p_default_Shoot = SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/Shoot");
             SteamVR_Actions.p_default_Interact = SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/Interact");
             SteamVR_Actions.p_default_Jump = SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/Jump");
@@ -309,6 +321,7 @@ namespace Valve.VR
             SteamVR_Actions.p_default_Reload = SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/Reload");
             SteamVR_Actions.p_default_OpenMap = SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/OpenMap");
             SteamVR_Actions.p_default_OpenMenu = SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/OpenMenu");
+            SteamVR_Actions.p_default_Ping = SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/Ping");
             SteamVR_Actions.p_default_Haptic = SteamVR_Action.Create<SteamVR_Action_Vibration>("/actions/default/out/Haptic");
         }
 
@@ -355,7 +368,7 @@ namespace Valve.VR
 
         private static SteamVR_Action_Vector2 p_default_Movement;
 
-        private static SteamVR_Action_Boolean p_default_Aim;
+        private static SteamVR_Action_Boolean p_default_ToggleWatchMode;
 
         private static SteamVR_Action_Boolean p_default_Shoot;
 
@@ -378,6 +391,8 @@ namespace Valve.VR
         private static SteamVR_Action_Boolean p_default_OpenMap;
 
         private static SteamVR_Action_Boolean p_default_OpenMenu;
+
+        private static SteamVR_Action_Boolean p_default_Ping;
 
         private static SteamVR_Action_Vibration p_default_Haptic;
 

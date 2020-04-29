@@ -489,7 +489,7 @@ namespace Valve.VR
                 steamVR_Input_ManifestFile_Application.url = "steam://launch/";
                 steamVR_Input_ManifestFile_Application.strings.Add("en_us", new SteamVR_Input_ManifestFile_ApplicationString
                 {
-                    name = string.Format("{0} [Testing]", Application.productName)
+                    name = string.Format("{0} VR", Application.productName)
                 });
                 steamVR_Input_ManifestFile2.applications = new List<SteamVR_Input_ManifestFile_Application>();
                 steamVR_Input_ManifestFile2.applications.Add(steamVR_Input_ManifestFile_Application);
