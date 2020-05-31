@@ -19,6 +19,7 @@
 //
 //=============================================================================
 
+using Assets.SteamVR_Standalone.Standalone;
 using UnityEngine;
 using Valve.VR;
 
@@ -74,7 +75,7 @@ namespace Valve.VR
         {
             if (fadeMaterial == null)
             {
-                fadeMaterial = new Material(Shader.Find("Custom/SteamVR_Fade"));
+                fadeMaterial = new Material(VRShaders.GetShader(VRShaders.VRShader.fade));
                 fadeMaterialColorID = Shader.PropertyToID("fadeColor");
             }
 

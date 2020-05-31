@@ -14,13 +14,15 @@ namespace Assets.SteamVR_Standalone.Standalone
             blit,
             blitFlip,
             overlay,
-            occlusion
+            occlusion,
+            fade
         }
 
         static Shader blit;
         static Shader blitFlip;
         static Shader overlay;
         static Shader occlusion;
+        static Shader fade;
 
         public static Shader GetShader(VRShader shader)
         {
@@ -39,6 +41,8 @@ namespace Assets.SteamVR_Standalone.Standalone
                     return overlay;
                 case (VRShader.occlusion):
                     return occlusion;
+                case (VRShader.fade):
+                    return fade;
             }
             Debug.LogWarning("No valid shader found");
             return null;
@@ -57,6 +61,7 @@ namespace Assets.SteamVR_Standalone.Standalone
             blit = assetBundle.LoadAsset<Shader>("assets/steamvr/resources/steamvr_blit.shader");
             blitFlip = assetBundle.LoadAsset<Shader>("assets/steamvr/resources/steamvr_blitFlip.shader");
             overlay = assetBundle.LoadAsset<Shader>("assets/steamvr/resources/steamvr_overlay.shader");
+            fade = assetBundle.LoadAsset<Shader>("assets/steamvr/resources/steamvr_fade.shader");
             string[] allAssetNames = assetBundle.GetAllAssetNames();
             for (int i = 0; i < allAssetNames.Length; i++)
             {
