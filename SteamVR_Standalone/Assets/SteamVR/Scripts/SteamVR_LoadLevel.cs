@@ -348,11 +348,6 @@ namespace Valve.VR
                     Debug.Log("<b>[SteamVR_Standalone]</b> WorkingDirectory = " + workingDirectory);
                     var error = applications.LaunchInternalProcess(fullPath, internalProcessArgs, workingDirectory);
                     Debug.Log("<b>[SteamVR_Standalone]</b> LaunchInternalProcessError: " + error);
-#if UNITY_EDITOR
-                    UnityEditor.EditorApplication.isPlaying = false;
-#elif !UNITY_METRO
-                    System.Diagnostics.Process.GetCurrentProcess().Kill();
-#endif
                 }
             }
             else

@@ -1,0 +1,19 @@
+ManifestFileVersion: 0
+CRC: 2057932645
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 4dfb1f3310ccc4a7d9a2a8461c854b88
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 7e9ee104d6bb707fb2602b751e6f78b1
+HashAppended: 0
+ClassTypes:
+- Class: 48
+  Script: {instanceID: 0}
+Assets:
+- Assets/SteamVR/Resources/SteamVR_Blit.shader
+- Assets/SteamVR/Resources/SteamVR_BlitFlip.shader
+- Assets/SteamVR/Resources/SteamVR_Overlay.shader
+- Assets/SteamVR/Resources/SteamVR_HiddenArea.shader
+Dependencies: []

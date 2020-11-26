@@ -354,9 +354,9 @@ public static class SteamVR_Utils
         previewFilename += ".png";
         VRFilename += ".png";
         texture2D2.Apply();
-        File.WriteAllBytes(previewFilename, texture2D2.EncodeToPNG());
+        File.WriteAllBytes(previewFilename, ImageConversion.EncodeToPNG(texture2D));
         texture2D.Apply();
-        File.WriteAllBytes(VRFilename, texture2D.EncodeToPNG());
+        File.WriteAllBytes(VRFilename, ImageConversion.EncodeToPNG(texture2D));
         if (camera2 != camera)
         {
             camera2.targetTexture = targetTexture;

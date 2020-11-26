@@ -236,7 +236,7 @@ namespace Valve.VR
 
 
 
-        public CVROverlay overlay { get; private set; }
+        public CVROverlay overlay { get; private set; } 
 
 
 

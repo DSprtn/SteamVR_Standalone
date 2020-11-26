@@ -234,12 +234,6 @@ namespace Valve.VR
                 {
                     base.transform.GetChild(0).parent = this.head;
                 }
-                GUILayer component2 = base.GetComponent<GUILayer>();
-                if (component2 != null)
-                {
-                    UnityEngine.Object.DestroyImmediate(component2);
-                    this.head.gameObject.AddComponent<GUILayer>();
-                }
                 AudioListener component3 = base.GetComponent<AudioListener>();
                 if (component3 != null)
                 {
